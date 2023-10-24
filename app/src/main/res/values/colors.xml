@@ -10,4 +10,9 @@
 
     <color name="veronese_green">#129575</color>
     <color name="orange_yellow">#ffb33c</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="peach">#ffe1b3</color>
+    <color name="background_null">#ebebeb</color>
+    <color name="black_600">#99000000</color>
+
 </resources>
