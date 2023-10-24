@@ -7,12 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="transparent">#fcfcfc</color>
     <color name="veronese_green">#129575</color>
     <color name="orange_yellow">#ffb33c</color>
+  
     <color name="transparent">#00FFFFFF</color>
     <color name="peach">#ffe1b3</color>
     <color name="background_null">#ebebeb</color>
     <color name="black_600">#99000000</color>
-
+    <color name="light_yellow">#FFE1B3</color>
+    <color name="gray">#D9D9D9</color>
+    <color name="brown">#484848</color>
+    <color name="light_gray">#A9A9A9</color>
 </resources>
