@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:orientation="horizontal"
+    android:weightSum="10">
+
+    <ImageView
+        android:id="@+id/btnBackHeader"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_weight="1"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_arrow_left" />
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="Header"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp" />
+
+    <ImageView
+        android:id="@+id/btnMoreHeader"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_weight="1"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_more" />
+
+
+</LinearLayout>
