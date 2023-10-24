@@ -2,4 +2,22 @@
     <string name="app_name">BTL_CNPM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello">Hello User</string>
+    <string name="what_are_you_cooking_today">What are you cooking today?</string>
+    <string name="search_recipe">Search recipe</string>
+    <string name="new_recipes">New recipes</string>
+    <string name="all">All</string>
+    <string name="classic_greek_salad">Classic Greek Salad</string>
+    <string name="time">Time</string>
+    <string name="mins_15">15 Mins</string>
+    <string name="recent_search">Recent search</string>
+    <string name="filter_search">Filter search</string>
+    <string name="newest">Newest</string>
+    <string name="oldest">Oldest</string>
+    <string name="popularity">Popularity</string>
+    <string name="rate">Rate</string>
+    <string name="category">Category</string>
+    <string name="filter">Filter</string>
+    <string name="profile">Profile</string>
+    <string name="recipe">Recipe</string>
 </resources>
