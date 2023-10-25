@@ -12,7 +12,7 @@
         android:title="Bookmark" />
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/signInFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/profile" />
 
