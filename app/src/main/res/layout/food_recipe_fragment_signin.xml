@@ -1,142 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout_welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_30sdp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_60sdp">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/text_view_hello"
+            android:id="@+id/tvHelloSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Hello,"
             android:textColor="@color/black"
-            android:textSize="@dimen/_35ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_24ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_welcome_back"
+            android:id="@+id/tvWelcomeSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Welcome Back!"
+            android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
-            android:layout_below="@id/text_view_hello"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_layout_input_field_gmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_180sdp"
-        android:layout_marginRight="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_320sdp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvHelloSignIn" />
 
         <TextView
-            android:id="@+id/text_view_gmail_label"
+            android:id="@+id/tvEmailSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gmail"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Email"
+            android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
-            android:textStyle="bold" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcomeSignIn" />
 
         <EditText
-            android:id="@+id/edit_text_gmail_input"
+            android:id="@+id/edtEmailSignIn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/text_view_gmail_label"
-            android:layout_marginTop="@dimen/_1sdp"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Gmail"
-            android:inputType="textPassword"
-            android:paddingStart="@dimen/_15sdp"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="@null" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_layout_input_field_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_266sdp"
-        android:layout_marginRight="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_233sdp">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/bg_white_stroke_1"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Enter email"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEmailSignIn" />
 
         <TextView
-            android:id="@+id/text_view_password_label"
+            android:id="@+id/tvPasswordSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter Password"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Password"
+            android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
-            android:textStyle="bold" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtEmailSignIn" />
 
-        <EditText
-            android:id="@+id/edit_text_password_input"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/text_view_password_label"
-            android:layout_marginTop="@dimen/_1sdp"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Enter Password"
-            android:inputType="textPassword"
-            android:paddingStart="@dimen/_12sdp"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="@null" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            app:hintEnabled="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPasswordSignIn"
+            app:passwordToggleEnabled="true">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/edtPasswordSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@drawable/bg_white_stroke_1"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Enter password"
+                android:padding="@dimen/_8sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
 
-    <Button
-        android:id="@+id/button_sign_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_90sdp"
-        android:layout_marginRight="@dimen/_90sdp"
-        android:layout_marginTop="@dimen/_400sdp"
-        android:background="@drawable/button_background"
-        android:text="Sign in →"
-        android:textColor="#FFFFFF"
-        android:textIsSelectable="false"
-        app:backgroundTint="@null" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/text_view_no_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_80sdp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_530sdp"
-        android:gravity="center_vertical"
-        android:text="Don't have an account? "
-        />
+        <TextView
+            android:id="@+id/tvForgetPasswordSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Forgot Password?"
+            android:textColor="@color/orange_yellow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutPassword" />
 
-    <TextView
-        android:id="@+id/text_view_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_195sdp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_530sdp"
-        android:gravity="center_vertical"
-        android:text="Sign up"
-        android:textColor="@color/orange_yellow"
-        />
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:background="@drawable/bg_btn_green_padding_5"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Sign in"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvForgetPasswordSignIn" />
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/btnSignIn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Don’t have an account?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Sign up"
+                android:textColor="@color/orange_yellow"
+                android:textSize="@dimen/_12ssp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
