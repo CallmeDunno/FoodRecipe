@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_60sdp">
+
+        <TextView
+            android:id="@+id/text_view_hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello,"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_35ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_view_welcome_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back!"
+            android:textSize="@dimen/_16ssp"
+            android:layout_below="@id/text_view_hello"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_input_field_gmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_180sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_320sdp">
+
+        <TextView
+            android:id="@+id/text_view_gmail_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gmail"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_text_gmail_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/text_view_gmail_label"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Gmail"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/_15sdp"
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@null" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_input_field_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_266sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_233sdp">
+
+        <TextView
+            android:id="@+id/text_view_password_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Password"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_text_password_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/text_view_password_label"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/_12sdp"
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@null" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_90sdp"
+        android:layout_marginRight="@dimen/_90sdp"
+        android:layout_marginTop="@dimen/_400sdp"
+        android:background="@drawable/button_background"
+        android:text="Sign in →"
+        android:textColor="#FFFFFF"
+        android:textIsSelectable="false"
+        app:backgroundTint="@null" />
+
+    <TextView
+        android:id="@+id/text_view_no_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_80sdp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_530sdp"
+        android:gravity="center_vertical"
+        android:text="Don't have an account? "
+        />
+
+    <TextView
+        android:id="@+id/text_view_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_195sdp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_530sdp"
+        android:gravity="center_vertical"
+        android:text="Sign up"
+        android:textColor="@color/orange_yellow"
+        />
+
+</FrameLayout>
