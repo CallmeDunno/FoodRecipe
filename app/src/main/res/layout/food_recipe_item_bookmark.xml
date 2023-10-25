@@ -76,7 +76,7 @@
                     android:layout_marginHorizontal="@dimen/_3sdp"
                     android:text="@{item.timer}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintBottom_toBottomOf="@id/imgBookmarkRecipe"
                     app:layout_constraintEnd_toStartOf="@id/imgBookmarkRecipe"
                     app:layout_constraintTop_toTopOf="@id/imgBookmarkRecipe" />
@@ -113,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_3sdp"
+                android:fontFamily="@font/poppins_medium"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{item.name}"
