@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
     <RelativeLayout
-        android:id="@+id/frame_2"
-        android:layout_width="@dimen/_209sdp"
-        android:layout_height="@dimen/_120sdp"
+        android:id="@+id/relative_layout_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_53sdp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/_104sdp">
 
         <ImageView
-            android:id="@+id/chef_hat"
+            android:id="@+id/image_view_chef_hat"
             android:layout_width="wrap_content"
-            android:layout_height="127dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:src="@drawable/splash" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/text_view_premium_recipes_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/chef_hat"
+            android:layout_below="@id/image_view_chef_hat"
             android:layout_marginTop="0dp"
             android:gravity="center"
             android:text="100K+ Premium Recipes"
@@ -35,20 +33,17 @@
 
     </RelativeLayout>
 
-
-
     <RelativeLayout
-        android:id="@+id/text"
-        android:layout_width="@dimen/_248sdp"
-        android:layout_height="@dimen/_140sdp"
+        android:id="@+id/relative_layout_get_cooking_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_35sdp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/_315sdp">
 
         <TextView
-            android:id="@+id/title1"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_view_get_cooking_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Get Cooking"
@@ -57,12 +52,11 @@
             android:textSize="@dimen/_45ssp"
             android:textStyle="bold" />
 
-
         <TextView
-            android:id="@+id/subtitle"
+            android:id="@+id/text_view_find_tasty_recipe_subtitle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_15sdp"
-            android:layout_below="@id/title1"
+            android:layout_below="@id/text_view_get_cooking_title"
             android:layout_marginTop="@dimen/_2sdp"
             android:gravity="center"
             android:text="Simple way to find Tasty Recipe"
@@ -73,11 +67,11 @@
 
     <Button
         android:id="@+id/button_start_cooking"
-        android:layout_width="@dimen/_215sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginLeft="@dimen/_90sdp"
         android:layout_marginTop="630dp"
         android:background="@drawable/button_background"
         android:text="Start Cooking →"

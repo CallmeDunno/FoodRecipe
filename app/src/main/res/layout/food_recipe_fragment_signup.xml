@@ -1,123 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:id="@+id/welcome_text"
-        android:layout_width="@dimen/_214sdp"
-        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/relative_layout_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_40sdp">
 
         <TextView
-            android:id="@+id/hello"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/text_view_create_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Create an account"
             android:textColor="@color/black"
             android:textSize="@dimen/_18ssp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/WelcomeBack"
+            android:id="@+id/text_view_welcome_back"
             android:layout_width="wrap_content"
-            android:layout_height="77dp"
-            android:layout_below="@id/hello"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_create_account"
             android:text="Let’s help you set up your account, it won’t take long."
             android:textSize="@dimen/_14ssp" />
     </RelativeLayout>
+
     <RelativeLayout
-        android:id="@+id/input_field"
-        android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_61sdp"
+        android:id="@+id/relative_layout_input_field_name"
+        android:layout_width="328dp"
+        android:layout_height="68dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_140sdp">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/text_view_name_label"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="wrap_content"
             android:text="Name"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/name_input"
+            android:id="@+id/edit_text_name_input"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_below="@id/name"
+            android:layout_height="39dp"
+            android:layout_below="@id/text_view_name_label"
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Name"
             android:inputType="textPassword"
-            app:backgroundTint="@null"
             android:paddingStart="@dimen/_15sdp"
-            android:textSize="@dimen/_12ssp"/>
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@null" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/input_field1"
-        android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_61sdp"
+        android:id="@+id/relative_layout_input_field_gmail"
+        android:layout_width="330dp"
+        android:layout_height="68dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_220sdp">
 
         <TextView
-            android:id="@+id/gmail"
+            android:id="@+id/text_view_gmail_label"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="wrap_content"
             android:text="Gmail"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/gmail_input"
+            android:id="@+id/edit_text_gmail_input"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_below="@id/gmail"
+            android:layout_height="39dp"
+            android:layout_below="@id/text_view_gmail_label"
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Gmail"
             android:inputType="textPassword"
-            app:backgroundTint="@null"
             android:paddingStart="@dimen/_15sdp"
-            android:textSize="@dimen/_12ssp"/>
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@null" />
 
     </RelativeLayout>
 
-
     <RelativeLayout
-        android:id="@+id/input_field2"
-        android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_61sdp"
+        android:id="@+id/relative_layout_input_field_password"
+        android:layout_width="327dp"
+        android:layout_height="68dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_310sdp">
 
         <TextView
-            android:id="@+id/password"
+            android:id="@+id/text_view_password_label"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="wrap_content"
             android:text="Enter Password"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/password_input"
+            android:id="@+id/edit_text_password_input"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_below="@id/password"
+            android:layout_height="39dp"
+            android:layout_below="@id/text_view_password_label"
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Enter Password"
@@ -127,28 +126,29 @@
             app:backgroundTint="@null" />
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:id="@+id/input_field3"
-        android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_61sdp"
+        android:id="@+id/relative_layout_input_field_confirmpassword"
+        android:layout_width="324dp"
+        android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_400sdp">
 
         <TextView
-            android:id="@+id/ConfirmPassword"
+            android:id="@+id/text_view_confirmpassword_label"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="wrap_content"
             android:text="Confirm Password"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/ConfirmPassword_input"
+            android:id="@+id/edit_text_confirmpassword_input"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_below="@id/ConfirmPassword"
+            android:layout_height="39dp"
+            android:layout_below="@id/text_view_confirmpassword_label"
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Confirm Password"
@@ -158,13 +158,14 @@
             app:backgroundTint="@null" />
 
     </RelativeLayout>
+
     <Button
-        android:id="@+id/button_start_cooking"
-        android:layout_width="@dimen/_162sdp"
+        android:id="@+id/button_sign_in"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_70sdp"
+        android:layout_marginLeft="@dimen/_90sdp"
         android:layout_marginTop="630dp"
         android:background="@drawable/button_background"
         android:text="Sign in →"
@@ -173,7 +174,7 @@
         app:backgroundTint="@null" />
 
     <TextView
-        android:id="@+id/don_t_have_"
+        android:id="@+id/text_view_already_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -182,10 +183,10 @@
         android:layout_marginTop="696dp"
         android:gravity="center_vertical"
         android:text="Already a member?"
-    />
+        />
 
     <TextView
-        android:id="@+id/sign_up"
+        android:id="@+id/sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -195,8 +196,6 @@
         android:gravity="center_vertical"
         android:text=" Sign In"
         android:textColor="@color/orange_yellow"
-    />
-
-
+        />
 
 </FrameLayout>

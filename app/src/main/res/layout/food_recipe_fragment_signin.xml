@@ -1,101 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout
-        android:id="@+id/welcome_text"
-        android:layout_width="@dimen/_160sdp"
-        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/relative_layout_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/_30sdp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/_60sdp">
 
         <TextView
-            android:id="@+id/hello"
+            android:id="@+id/text_view_hello"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="wrap_content"
             android:text="Hello,"
             android:textColor="@color/black"
             android:textSize="@dimen/_35ssp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/WelcomeBack"
+            android:id="@+id/text_view_welcome_back"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
             android:text="Welcome Back!"
             android:textSize="@dimen/_16ssp"
-            android:layout_below="@id/hello"/>
+            android:layout_below="@id/text_view_hello"/>
     </RelativeLayout>
+
     <RelativeLayout
-        android:id="@+id/input_field"
-        android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_61sdp"
+        android:id="@+id/relative_layout_input_field_gmail"
+        android:layout_width="322dp"
+        android:layout_height="63dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_180sdp">
 
         <TextView
-            android:id="@+id/gmail"
+            android:id="@+id/text_view_gmail_label"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="wrap_content"
             android:text="Gmail"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/gmail_input"
+            android:id="@+id/edit_text_gmail_input"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_below="@id/gmail"
-            android:layout_marginTop="0dp"
+            android:layout_height="39dp"
+            android:layout_below="@id/text_view_gmail_label"
+            android:layout_marginTop="-4dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Gmail"
             android:inputType="textPassword"
-            app:backgroundTint="@null"
             android:paddingStart="@dimen/_15sdp"
-            android:textSize="@dimen/_12ssp"/>
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@null" />
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:id="@+id/input_field1"
-        android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_61sdp"
+        android:id="@+id/relative_layout_input_field_password"
+        android:layout_width="322dp"
+        android:layout_height="67dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_266sdp">
 
         <TextView
-            android:id="@+id/password"
+            android:id="@+id/text_view_password_label"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
-            android:textSize="@dimen/_16ssp"
+            android:layout_height="wrap_content"
             android:text="Enter Password"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/password_input"
+            android:id="@+id/edit_text_password_input"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_below="@id/password"
+            android:layout_height="39dp"
+            android:layout_below="@id/text_view_password_label"
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Enter Password"
             android:inputType="textPassword"
-            app:backgroundTint="@null"
             android:paddingStart="@dimen/_12sdp"
-            android:textSize="@dimen/_12ssp"/>
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@null" />
 
     </RelativeLayout>
 
-
     <Button
-        android:id="@+id/button_start_cooking"
+        android:id="@+id/button_sign_in"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -109,7 +110,7 @@
         app:backgroundTint="@null" />
 
     <TextView
-        android:id="@+id/don_t_have_"
+        android:id="@+id/text_view_no_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -118,10 +119,10 @@
         android:layout_marginTop="696dp"
         android:gravity="center_vertical"
         android:text="Don't have an account? "
-    />
+        />
 
     <TextView
-        android:id="@+id/sign_up"
+        android:id="@+id/text_view_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -131,8 +132,6 @@
         android:gravity="center_vertical"
         android:text="Sign up"
         android:textColor="@color/orange_yellow"
-    />
-
-
+        />
 
 </FrameLayout>
