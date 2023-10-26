@@ -120,7 +120,7 @@
             android:layout_marginTop="@dimen/_35sdp"
             android:background="@drawable/bg_btn_green_padding_5"
             android:fontFamily="@font/poppins_medium"
-            android:text="Sign in"
+            android:text="Sign in   ->"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"

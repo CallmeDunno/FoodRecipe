@@ -1,81 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout_welcome_text"
+
+    <ImageView
+        android:id="@+id/imgchefhat_splash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_104sdp">
+        android:src="@drawable/splash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/_123sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+         />
 
-        <ImageView
-            android:id="@+id/image_view_chef_hat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/splash" />
+     <TextView
+         android:id="@+id/tv100k_splash"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:textColor="@color/white"
+         android:text="100K+ Premium Recipes"
+         android:textSize="@dimen/_14ssp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/imgchefhat_splash"
+         android:layout_marginHorizontal="@dimen/_75sdp"
+         />
 
-        <TextView
-            android:id="@+id/text_view_premium_recipes_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/image_view_chef_hat"
-            android:gravity="center"
-            android:text="100K+ Premium Recipes"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/_14ssp" />
 
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_layout_get_cooking_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_315sdp">
 
         <TextView
-            android:id="@+id/text_view_get_cooking_title"
+            android:id="@+id/tvgetcooking_splash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Get Cooking"
+            android:text="    Get Cooking"
             android:textColor="@color/white"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/_45ssp"
-            android:textStyle="bold" />
-
+            android:textSize="@dimen/_40ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv100k_splash"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginHorizontal="@dimen/_82sdp"
+            />
         <TextView
-            android:id="@+id/text_view_find_tasty_recipe_subtitle"
+            android:id="@+id/tvRecipe_splash"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_below="@id/text_view_get_cooking_title"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Simple way to find Tasty Recipe"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvgetcooking_splash"
+            android:layout_marginHorizontal="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            />
+
+
+        <Button
+            android:id="@+id/btnstarcooking_splash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRecipe_splash"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Start Cooking    ->"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_14sdp"
+            android:background="@drawable/bg_btn_green_padding_5"/>
 
-    </RelativeLayout>
 
-    <Button
-        android:id="@+id/button_start_cooking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_90sdp"
-        android:layout_marginTop="@dimen/_450sdp"
-        android:background="@drawable/button_background"
-        android:text="Start Cooking →"
-        android:textColor="@color/white"
-        android:textIsSelectable="false"
-        app:backgroundTint="@null" />
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
