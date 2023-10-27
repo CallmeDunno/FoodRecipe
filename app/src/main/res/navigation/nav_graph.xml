@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookmarkFragment"
@@ -31,10 +34,18 @@
         android:id="@+id/searchFragment"
         tools:layout="@layout/food_recipe_fragment_search"
         android:name="com.example.btl_cnpm.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         tools:layout="@layout/food_recipe_fragment_profile"
         android:name="com.example.btl_cnpm.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.btl_cnpm.ui.sign_in.SignInFragment"
+        android:label="SignInFragment" />
 </navigation>
