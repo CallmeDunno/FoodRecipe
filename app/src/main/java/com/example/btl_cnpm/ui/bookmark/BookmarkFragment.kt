@@ -7,7 +7,9 @@ import com.example.btl_cnpm.ui.bookmark.adapter.BookmarkAdapter
 import com.example.btl_cnpm.utils.DataLocal
 import com.example.btl_cnpm.utils.extensions.hide
 import com.example.btl_cnpm.utils.extensions.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_bookmark
 

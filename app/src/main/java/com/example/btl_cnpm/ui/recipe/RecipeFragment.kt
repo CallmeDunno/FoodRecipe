@@ -1,17 +1,12 @@
 package com.example.btl_cnpm.ui.recipe
 
-import android.os.Bundle
-import android.provider.MediaStore.Audio.Radio
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentRecipeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_recipe
 
