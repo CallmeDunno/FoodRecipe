@@ -1,7 +1,5 @@
 package com.example.btl_cnpm.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -19,14 +17,16 @@ class FoodRecipeActivity : BaseActivity<FoodRecipeActivityMainBinding>() {
 
     override fun initView() {
         super.initView()
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         _navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id){
+            when (destination.id) {
                 R.id.homeFragment,
-                R.id.bookmarkFragment ,
-                R.id.profileFragment -> binding.bottomNavigation.show()
+                R.id.bookmarkFragment,
+                R.id.profileFragment,
+                R.id.searchFragment -> binding.bottomNavigation.show()
                 else -> binding.bottomNavigation.hide()
             }
         }

@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
+import com.example.btl_cnpm.databinding.FoodRecipeFragmentSearchBinding
 
-class SearchFragment : Fragment() {
-
+class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
+    override val layoutId = R.layout.food_recipe_fragment_search
 
 
 }
