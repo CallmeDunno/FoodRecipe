@@ -8,7 +8,9 @@ import com.example.btl_cnpm.base.BaseActivity
 import com.example.btl_cnpm.databinding.FoodRecipeActivityMainBinding
 import com.example.btl_cnpm.utils.extensions.hide
 import com.example.btl_cnpm.utils.extensions.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FoodRecipeActivity : BaseActivity<FoodRecipeActivityMainBinding>() {
     override val layoutID = R.layout.food_recipe_activity_main
 
@@ -23,11 +25,10 @@ class FoodRecipeActivity : BaseActivity<FoodRecipeActivityMainBinding>() {
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment,
-                R.id.bookmarkFragment,
-                R.id.profileFragment,
-                R.id.searchFragment -> binding.bottomNavigation.show()
-                else -> binding.bottomNavigation.hide()
+                R.id.splashFragment,
+                R.id.signInFragment,
+                R.id.signUpFragment -> binding.bottomNavigation.hide()
+                else -> binding.bottomNavigation.show()
             }
         }
     }
