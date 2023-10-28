@@ -26,6 +26,9 @@ class SignInFragment : BaseFragment<FoodRecipeFragmentSigninBinding>() {
                 requireView().findNavController().popBackStack(R.id.login_navigation, true)
                 requireView().findNavController().navigate(R.id.home_navigation)
             }
+            tvForgetPasswordSignIn.setOnClickListener {
+                requireView().findNavController().navigate(R.id.forgotPasswordFragment)
+            }
         }
     }
 }
