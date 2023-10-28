@@ -7,6 +7,12 @@
         android:title="Home" />
 
     <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/white"
+        android:title="Search" />
+
+    <item
         android:id="@+id/bookmarkFragment"
         android:icon="@drawable/ic_bookmark_white"
         android:title="Bookmark" />

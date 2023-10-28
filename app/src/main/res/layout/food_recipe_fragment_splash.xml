@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout_welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_104sdp">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
 
         <ImageView
-            android:id="@+id/image_view_chef_hat"
+            android:id="@+id/imgchefhat_splash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/splash" />
+            android:layout_marginTop="@dimen/_80sdp"
+            android:src="@drawable/splash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_premium_recipes_title"
-            android:layout_width="match_parent"
+            android:id="@+id/tv100k_splash"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image_view_chef_hat"
-            android:gravity="center"
-            android:text="100K+ Premium Recipes"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/_14ssp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative_layout_get_cooking_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_315sdp">
-
-        <TextView
-            android:id="@+id/text_view_get_cooking_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Get Cooking"
-            android:textColor="@color/white"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/_45ssp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/text_view_find_tasty_recipe_subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_below="@id/text_view_get_cooking_title"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center"
-            android:text="Simple way to find Tasty Recipe"
+            android:text="100K+ Premium Recipes"
             android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintEnd_toEndOf="@+id/imgchefhat_splash"
+            app:layout_constraintStart_toStartOf="@+id/imgchefhat_splash"
+            app:layout_constraintTop_toBottomOf="@id/imgchefhat_splash" />
 
-    </RelativeLayout>
 
-    <Button
-        android:id="@+id/button_start_cooking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/_90sdp"
-        android:layout_marginTop="@dimen/_450sdp"
-        android:background="@drawable/button_background"
-        android:text="Start Cooking →"
-        android:textColor="@color/white"
-        android:textIsSelectable="false"
-        app:backgroundTint="@null" />
+        <TextView
+            android:id="@+id/tvgetcooking_splash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Get\nCooking"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_40ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvRecipe_splash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvRecipe_splash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_45sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Simple way to find Tasty Recipe"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toTopOf="@+id/btnStartSplash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnStartSplash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_65sdp"
+            android:layout_marginBottom="@dimen/_65sdp"
+            android:background="@drawable/bg_btn_green_padding_5"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Start Cooking"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
