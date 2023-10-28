@@ -19,8 +19,8 @@ class SplashFragment : BaseFragment<FoodRecipeFragmentSplashBinding>() {
         binding.btnStartSplash.setOnClickListener {
             //TODO("CHECK DATABASE LOCAL")
 //            requireView().findNavController().popBackStack(R.id.login_navigation, true)
-//            requireView().findNavController().navigate(R.id.signInFragment)
-            requireView().findNavController().navigate(R.id.home_navigation)
+            requireView().findNavController().navigate(R.id.signInFragment)
+//            requireView().findNavController().navigate(R.id.home_navigation)
         }
     }
 }

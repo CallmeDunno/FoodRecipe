@@ -43,6 +43,18 @@
             <action
                 android:id="@+id/action_global_homeFragment"
                 app:destination="@id/home_navigation"/>
+            <action
+                android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
+                app:destination="@id/forgotPasswordFragment" />
+        </fragment>
+        <fragment
+            tools:layout="@layout/food_recipe_fragment_forgot_password"
+            android:id="@+id/forgotPasswordFragment"
+            android:name="com.example.btl_cnpm.ui.forgot_pasword.ForgotPasswordFragment"
+            android:label="ForgotPasswordFragment" >
+            <action
+                android:id="@+id/action_forgotPasswordFragment_to_signUpFragment"
+                app:destination="@id/signUpFragment" />
         </fragment>
     </navigation>
     <navigation

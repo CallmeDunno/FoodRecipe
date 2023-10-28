@@ -27,7 +27,8 @@ class FoodRecipeActivity : BaseActivity<FoodRecipeActivityMainBinding>() {
             when (destination.id) {
                 R.id.splashFragment,
                 R.id.signInFragment,
-                R.id.signUpFragment -> binding.bottomNavigation.hide()
+                R.id.signUpFragment,
+                R.id.forgotPasswordFragment -> binding.bottomNavigation.hide()
                 else -> binding.bottomNavigation.show()
             }
         }
