@@ -1,6 +1,6 @@
 package com.example.btl_cnpm.ui.recipe
 
-import androidx.core.content.ContextCompat
+import android.text.method.ScrollingMovementMethod
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentRecipeBinding
@@ -14,24 +14,11 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
         super.initView()
         binding.apply {
             headerRecipe.tvHeader.text = ""
+            tvIngredientRecipe.movementMethod = ScrollingMovementMethod()
         }
     }
 
     override fun initAction() {
         super.initAction()
-        binding.apply {
-            rgTabBar.setOnCheckedChangeListener { _, i ->
-                when(i){
-                    R.id.rbIngredientRecipe -> {
-                        rbIngredientRecipe.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                        rbProcedureRecipe.setTextColor(ContextCompat.getColor(requireContext(), R.color.veronese_green))
-                    }
-                    R.id.rbProcedureRecipe -> {
-                        rbIngredientRecipe.setTextColor(ContextCompat.getColor(requireContext(), R.color.veronese_green))
-                        rbProcedureRecipe.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                    }
-                }
-            }
-        }
     }
 }

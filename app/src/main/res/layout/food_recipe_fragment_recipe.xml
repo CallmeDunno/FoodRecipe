@@ -227,43 +227,31 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <RadioGroup
-            android:id="@+id/rgTabBar"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/layoutAuthor">
+            android:text="Ingredient"
+            app:layout_constraintTop_toBottomOf="@id/layoutAuthor"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/black"
+            android:id="@+id/tvTitleIngredientRecipe"
+            android:layout_marginTop="@dimen/_8sdp" />
 
-            <RadioButton
-                android:id="@+id/rbIngredientRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/bg_green_radio_button"
-                android:button="@null"
-                android:checked="true"
-                android:fontFamily="@font/poppins_medium"
-                android:padding="@dimen/_10sdp"
-                android:text="Ingredient"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp" />
-
-            <RadioButton
-                android:id="@+id/rbProcedureRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:background="@drawable/bg_green_radio_button"
-                android:button="@null"
-                android:fontFamily="@font/poppins_medium"
-                android:padding="@dimen/_10sdp"
-                android:text="Procedure"
-                android:textColor="@color/veronese_green"
-                android:textSize="@dimen/_12ssp" />
-
-        </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:textSize="@dimen/_14ssp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:scrollbarSize="@dimen/_1sdp"
+            android:scrollbars="vertical"
+            android:maxLines="4"
+            android:id="@+id/tvIngredientRecipe"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleIngredientRecipe"/>
 
         <LinearLayout
             android:id="@+id/layoutItemCountRecipe"
@@ -273,7 +261,7 @@
             android:layout_marginVertical="@dimen/_5sdp"
             android:orientation="horizontal"
             android:weightSum="2"
-            app:layout_constraintTop_toBottomOf="@id/rgTabBar">
+            app:layout_constraintTop_toBottomOf="@id/tvIngredientRecipe">
 
             <TextView
                 android:layout_width="0dp"
@@ -282,7 +270,7 @@
                 android:drawableStart="@drawable/ic_cook"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="1 serve"
+                android:text="Procedure"
                 android:textAlignment="textStart"
                 android:textSize="@dimen/_12ssp" />
 
@@ -290,6 +278,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/tvTotalStepsRecipe"
                 android:fontFamily="@font/poppins_medium"
                 android:text="10 Items"
                 android:textAlignment="textEnd"
@@ -305,7 +294,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutItemCountRecipe"
-            tools:listitem="@layout/food_recipe_item_ingredient" />
+            tools:listitem="@layout/food_recipe_item_step" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
