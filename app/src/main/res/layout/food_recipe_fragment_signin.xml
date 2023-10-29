@@ -53,6 +53,7 @@
             android:id="@+id/edtEmailSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:background="@drawable/bg_white_stroke_1"
@@ -61,7 +62,6 @@
             android:padding="@dimen/_8sdp"
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvEmailSignIn" />
 
         <TextView
@@ -83,7 +83,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
             app:hintEnabled="false"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPasswordSignIn"
             app:passwordToggleEnabled="true">
 
@@ -101,16 +100,36 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvForgetPasswordSignIn"
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutSupportSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Forgot Password?"
-            android:textColor="@color/orange_yellow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutPassword" />
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@id/layoutPassword">
+
+            <CheckBox
+                android:id="@+id/cbRememberMeSignIn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/orange_yellow"
+                android:text="Remember me"
+                android:textColor="@color/orange_yellow" />
+
+            <TextView
+                android:id="@+id/tvForgetPasswordSignIn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Forgot Password?"
+                android:textAlignment="textEnd"
+                android:textColor="@color/orange_yellow" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSignIn"
@@ -125,7 +144,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvForgetPasswordSignIn" />
+            app:layout_constraintTop_toBottomOf="@id/layoutSupportSignIn" />
 
         <LinearLayout
             android:layout_width="match_parent"
