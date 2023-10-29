@@ -52,11 +52,12 @@ class Recipe {
 
     private var _timer: Int? = 0
     var timer
-        get() = _timer ?: 0
+        get() = _timer ?: ""
         set(value) {
             _timer = value
         }
 
+    constructor()
     constructor(
         id: String,
         name: String,
