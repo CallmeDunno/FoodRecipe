@@ -40,7 +40,7 @@
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginVertical="@dimen/_3sdp"
             android:fontFamily="@font/poppins_medium"
-            android:text="Login failed, please check your login information"
+            android:text= "@string/login_fail"
             android:textAlignment="center"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@id/tvError" />

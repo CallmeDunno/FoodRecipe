@@ -36,6 +36,7 @@ class LoginRepository @Inject constructor(private val fAuth: FirebaseAuth, priva
                         }
                 } else {
                     result.invoke(UIState.Failure(it.result.toString()))
+                    return@addOnCompleteListener
                 }
             }
     }
