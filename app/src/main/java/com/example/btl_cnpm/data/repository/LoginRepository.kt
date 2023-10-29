@@ -24,7 +24,6 @@ class LoginRepository @Inject constructor(private val fAuth: FirebaseAuth, priva
             }
     }
 
-
     fun signUp(username: String, email: String, password: String, result: (UIState<String>) -> Unit) {
         val user: HashMap<String, Any> = hashMapOf()
         user["username"] = username

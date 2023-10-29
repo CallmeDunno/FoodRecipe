@@ -121,14 +121,12 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.mcdev.filledboxspinner.FilledBoxSpinner
-                        android:id="@+id/spinnerTypeNewRecipe"
-                        android:layout_width="match_parent"
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="40dp"
-                        app:hint="Type"
-                        app:icon="@drawable/ic_cook"
-                        app:iconPosition="start" />
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_white_stroke_1"
+                        android:id="@+id/spinnerTypeNewRecipe" />
 
                 </LinearLayout>
 
