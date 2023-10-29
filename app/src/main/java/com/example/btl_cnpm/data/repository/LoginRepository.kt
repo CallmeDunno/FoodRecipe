@@ -13,5 +13,16 @@ class LoginRepository @Inject constructor(private val fAuth: FirebaseAuth, priva
             .addOnCompleteListener { result.invoke(UIState.Success(it.result.user?.uid.toString())) }
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
+    fun forgotPassword(email: String, result: (UIState<String>) -> Unit) {
+        fAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    result.invoke(UIState.Success("Email xác nhận đã được gửi. Vui lòng kiểm tra hộp thư đến của bạn."))
+                } else {
+                    result.invoke(UIState.Failure(task.exception?.message.toString()))
+                }
+            }
+    }
+
 
 }
