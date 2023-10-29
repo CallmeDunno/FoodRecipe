@@ -78,4 +78,14 @@ class User {
         this._totalFollower = follower
         this._totalFollowing = following
     }
+
+    constructor(
+        username: String,
+        password: String,
+        email: String
+    ) {
+        this._username = username
+        this._password = password
+        this._email = email
+    }
 }

@@ -76,17 +76,34 @@
             android:textColor="@color/veronese_green"
             android:textSize="@dimen/_11ssp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/bg_text_input"
-            android:backgroundTint="@color/veronese_green"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/recipe"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_11ssp" />
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_text_input"
+                android:backgroundTint="@color/veronese_green"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/recipe"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_add_recipe"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_add"
+                android:scaleType="centerInside"
+                android:tint="@color/white"
+                app:layout_constraintVertical_bias="1"
+                android:background="@drawable/bg_text_input_no_padding"
+                android:backgroundTint="@color/veronese_green"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
