@@ -19,4 +19,8 @@
     <string name="filter">Filter</string>
     <string name="profile">Profile</string>
     <string name="recipe">Recipe</string>
+    <string name="name">Name</string>
+    <string name="re_enter_your_password">Re enter your password</string>
+    <string name="email_is_not_valid">Email is not valid!</string>
+    <string name="sign_up_fail">Sign up failed, please check your information</string>
 </resources>
