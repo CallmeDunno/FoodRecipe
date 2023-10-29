@@ -21,7 +21,7 @@
                 app:destination="@id/signInFragment" />
             <action
                 android:id="@+id/action_global_homeFragment"
-                app:destination="@id/home_navigation"/>
+                app:destination="@id/home_navigation" />
         </fragment>
         <fragment
             android:id="@+id/signUpFragment"
@@ -42,16 +42,16 @@
                 app:destination="@id/signUpFragment" />
             <action
                 android:id="@+id/action_global_homeFragment"
-                app:destination="@id/home_navigation"/>
+                app:destination="@id/home_navigation" />
             <action
                 android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
                 app:destination="@id/forgotPasswordFragment" />
         </fragment>
         <fragment
-            tools:layout="@layout/food_recipe_fragment_forgot_password"
             android:id="@+id/forgotPasswordFragment"
             android:name="com.example.btl_cnpm.ui.forgot_pasword.ForgotPasswordFragment"
-            android:label="ForgotPasswordFragment" >
+            android:label="ForgotPasswordFragment"
+            tools:layout="@layout/food_recipe_fragment_forgot_password">
             <action
                 android:id="@+id/action_forgotPasswordFragment_to_signUpFragment"
                 app:destination="@id/signUpFragment" />
@@ -98,6 +98,15 @@
             android:id="@+id/profileFragment"
             android:name="com.example.btl_cnpm.ui.profile.ProfileFragment"
             android:label="ProfileFragment"
-            tools:layout="@layout/food_recipe_fragment_profile" />
+            tools:layout="@layout/food_recipe_fragment_profile">
+            <action
+                android:id="@+id/action_profileFragment_to_newRecipeFragment"
+                app:destination="@id/newRecipeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newRecipeFragment"
+            android:name="com.example.btl_cnpm.ui.new_recipe.NewRecipeFragment"
+            android:label="NewRecipeFragment"
+            tools:layout="@layout/food_recipe_fragment_new_recipe" />
     </navigation>
 </navigation>

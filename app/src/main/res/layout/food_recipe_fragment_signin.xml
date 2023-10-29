@@ -53,12 +53,13 @@
             android:id="@+id/edtEmailSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:background="@drawable/bg_white_stroke_1"
             android:fontFamily="@font/poppins_medium"
             android:hint="Enter email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
             android:padding="@dimen/_8sdp"
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
@@ -86,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvPasswordSignIn"
             app:passwordToggleEnabled="true">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtPasswordSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,6 +95,8 @@
                 android:background="@drawable/bg_white_stroke_1"
                 android:fontFamily="@font/poppins_medium"
                 android:hint="Enter password"
+                android:inputType="text"
+                android:maxLines="1"
                 android:padding="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp" />
