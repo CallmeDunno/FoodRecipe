@@ -26,4 +26,12 @@
     <string name="sign_up_successfully">Sign up successfully</string>
     <string name="fill_in_information">Please fill in information</string>
     <string name="login_fail">Login failed, please check your login information</string>
+    <string name="mon_nuong">Món nướng</string>
+    <string name="mon_kho">Món kho</string>
+    <string name="mon_chien">Món chiên</string>
+    <string name="mon_xao">Món xào</string>
+    <string name="mon_canh">Món canh</string>
+    <string name="mon_lau">Món lâut</string>
+    <string name="mon_hap">Món hấp</string>
+
 </resources>

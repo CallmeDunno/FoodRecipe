@@ -50,13 +50,14 @@ class Recipe {
             _image = value
         }
 
-    private var _timer: Int?= 0
+    private var _timer: String?= ""
     var timer
-        get() = _timer ?: 0
+        get() = _timer ?: ""
         set(value) {
             _timer = value
         }
 
+    constructor()
     constructor(
         id: String,
         name: String,
@@ -65,7 +66,7 @@ class Recipe {
         ingredient: String,
         date: String,
         image: String,
-        timer: Int
+        timer: String
 
     ) {
         this._id = id
