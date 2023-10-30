@@ -9,11 +9,11 @@ import androidx.room.Query
 @Dao
 interface BookmarkLocalDao {
     @Query("SELECT * FROM Bookmark")
-    fun getAllNotes() : LiveData<List<BookmarkLocal>>
+    fun getAllItemBookmark() : LiveData<List<BookmarkLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNote(bookmarkLocal: BookmarkLocal)
+    fun insertItemBookmark(bookmarkLocal: BookmarkLocal)
 
     @Query("DELETE FROM Bookmark WHERE id = :id")
-    fun deleteNote(id : Int)
+    fun deleteItemBookmark(id : Int)
 }

@@ -25,7 +25,7 @@ class RecipeAdapter(val context: Context,
         fun onBind(recipe: Recipe) {
             Glide.with(context).load(recipe.image).into(binding.imgRecipe)
             binding.txtRecipeName.text = recipe.name
-            binding.txtRecipeMinute.text = recipe.timer
+            binding.txtRecipeMinute.text = "${recipe.timer}"
             binding.btnMark.setOnClickListener {
 
             }

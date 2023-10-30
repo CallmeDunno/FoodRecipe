@@ -1,13 +1,6 @@
 package com.example.btl_cnpm.ui.sign_in
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Patterns
-import android.view.Gravity
-import android.view.Window
-import android.view.WindowManager
-import android.widget.Button
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.btl_cnpm.R
@@ -41,7 +34,7 @@ class SignInFragment : BaseFragment<FoodRecipeFragmentSigninBinding>() {
             btnSignIn.setOnClickListener {
                 val username = edtEmailSignIn.text.toString().trim()
                 val password = edtPasswordSignIn.text.toString().trim()
-                if(username.isEmpty() || password.isEmpty()) {
+                if (username.isEmpty() || password.isEmpty()) {
                     showDialogFail(requireContext().getString(R.string.fill_in_information))
                     return@setOnClickListener
                 }
@@ -65,8 +58,7 @@ class SignInFragment : BaseFragment<FoodRecipeFragmentSigninBinding>() {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     edtEmailSignIn.error = requireContext().getString(R.string.email_is_not_valid)
                     return@setOnClickListener
                 }
