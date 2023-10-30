@@ -1,5 +1,6 @@
 package com.example.btl_cnpm.ui.home
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.example.btl_cnpm.R
@@ -7,28 +8,43 @@ import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentHomeBinding
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
+import com.example.btl_cnpm.ui.home.adapter.NewRecipeAdapter
 import com.example.btl_cnpm.ui.home.adapter.RecipeAdapter
 import com.example.btl_cnpm.ui.sign_in.SignInViewModel
+import com.example.btl_cnpm.utils.UIState
 import dagger.hilt.android.AndroidEntryPoint
 
+@SuppressLint("SuspiciousIndentation")
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_home
 
     private val homeViewModel by viewModels<HomeViewModel>()
-    private var recipeList = arrayListOf<Recipe>()
+    private var recipeList = mutableListOf<Recipe>()
+    private var newRecipeList = mutableListOf<Recipe>()
     private val categoryAdapter by lazy {
-        CategoryAdapter(requireContext(), onItemClick = {
+        CategoryAdapter(onItemClick = {
             if(it.contentEquals("T9b6E7ecYMt4Qyq3Pmn0")) {
                 recipeAdapter.submitList(recipeList)
-            } else
-            recipeAdapter.submitList(recipeList.filter {recipe ->
-                recipe.idCategory.contentEquals(it)
-            })
+            } else {
+                newRecipeList = recipeList.filter { recipe ->
+                    recipe.idCategoryType.contentEquals(it)
+                }.toMutableList()
+                if (newRecipeList.isEmpty()) {
+                    recipeAdapter.submitList(recipeList)
+                } else {
+                    recipeAdapter.submitList(newRecipeList)
+                }
+            }
+        })
+    }
+    private val newRecipeAdapter by lazy {
+        NewRecipeAdapter(onItemCLick = {
+
         })
     }
     private val recipeAdapter by lazy {
-        RecipeAdapter(requireContext(), onItemClick = {
+        RecipeAdapter(onItemClick = {
 
         })
     }
@@ -37,14 +53,33 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
         binding.apply {
             rvRecipeCategory.adapter = categoryAdapter
             rvRecipe.adapter = recipeAdapter
-
+            rvNewRecipes.adapter = newRecipeAdapter
             homeViewModel.getCategory().observe(requireActivity()) {
-                categoryAdapter.submitList(it)
+                when(it) {
+                    is UIState.Success -> {
+                        categoryAdapter.submitList(it.data)
+                    }
+                    is UIState.Failure -> {
+                        it.message?.let {mes ->
+                            showDialogFail(mes)
+                        }
+                    }
+                }
             }
 
             homeViewModel.getRecipes().observe(requireActivity()) {
-                recipeList = it
-                recipeAdapter.submitList(it)
+                when(it) {
+                    is UIState.Success -> {
+                        recipeList = it.data
+                        recipeAdapter.submitList(it.data)
+                        newRecipeAdapter.submitList(it.data)
+                    }
+                    is UIState.Failure -> {
+                        it.message?.let {mes ->
+                            showDialogFail(mes)
+                        }
+                    }
+                }
             }
         }
 

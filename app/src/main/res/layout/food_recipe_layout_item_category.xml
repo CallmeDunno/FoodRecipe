@@ -8,16 +8,17 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_5sdp">
+        android:layout_margin="@dimen/_5sdp">
         <TextView
             android:id="@+id/txt_recipe_category"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_140sdp"
             android:layout_height="wrap_content"
             android:text="@string/all"
             android:textSize="@dimen/_11ssp"
             android:textColor="@color/text_selector_gray_white"
             android:fontFamily="@font/poppins_medium"
             android:textStyle="bold"
+            android:maxLines="1"
             android:paddingHorizontal="@dimen/_25sdp"
             android:paddingVertical="@dimen/_4sdp"
             android:textAlignment="center"

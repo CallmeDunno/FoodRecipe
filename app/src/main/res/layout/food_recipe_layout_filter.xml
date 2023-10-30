@@ -35,52 +35,15 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
 
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_time_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp">
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/food_recipe_layout_item_filter"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/btn_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:background="@drawable/bg_selector_selector_white_green_stroke"
-                    android:text="@string/all"
-                    android:textColor="@color/text_selector"
-                    android:textSize="@dimen/_11ssp"/>
-                <TextView
-                    android:id="@+id/btn_newest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:background="@drawable/bg_selector_selector_white_green_stroke"
-                    android:text="@string/newest"
-                    android:textColor="@color/text_selector"
-                    android:textSize="@dimen/_11ssp" />
-                <TextView
-                    android:id="@+id/btn_oldest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:background="@drawable/bg_selector_selector_white_green_stroke"
-                    android:text="@string/oldest"
-                    android:textColor="@color/text_selector"
-                    android:textSize="@dimen/_11ssp" />
-                <TextView
-                    android:id="@+id/btn_popularity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_selector_selector_white_green_stroke"
-                    android:text="@string/popularity"
-                    android:textColor="@color/text_selector"
-                    android:textSize="@dimen/_11ssp" />
-            </LinearLayout>
-        </HorizontalScrollView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,150 +55,14 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rate_filter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/btn_5_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_text_input_no_padding"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/btn_4_star"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:text="5"
-                    android:textColor="@color/veronese_green"
-                    android:textSize="@dimen/_11ssp"/>
-
-                <ImageView
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_star"
-                    app:tint="@color/veronese_green" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_4_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_text_input_no_padding"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/btn_3_star"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btn_5_star"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:text="4"
-                    android:textColor="@color/veronese_green"
-                    android:textSize="@dimen/_11ssp" />
-
-                <ImageView
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_star"
-                    app:tint="@color/veronese_green" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_3_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_text_input_no_padding"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/btn_2_star"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btn_4_star"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:text="3"
-                    android:textColor="@color/veronese_green"
-                    android:textSize="@dimen/_11ssp" />
-
-                <ImageView
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_star"
-                    app:tint="@color/veronese_green" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_2_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_text_input_no_padding"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/btn_1_star"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btn_3_star"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:text="2"
-                    android:textColor="@color/veronese_green"
-                    android:textSize="@dimen/_11ssp" />
-
-                <ImageView
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_star"
-                    app:tint="@color/veronese_green" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_1_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_text_input_no_padding"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btn_2_star"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:text="1"
-                    android:textColor="@color/veronese_green"
-                    android:textSize="@dimen/_11ssp" />
-
-                <ImageView
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_star"
-                    app:tint="@color/veronese_green" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/food_recipe_layout_item_filter"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -248,12 +75,13 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recipe_category"
+            android:id="@+id/rv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/food_recipe_layout_item_category" />
+            tools:listitem="@layout/food_recipe_layout_item_category"
+            app:spanCount="2"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_filter"

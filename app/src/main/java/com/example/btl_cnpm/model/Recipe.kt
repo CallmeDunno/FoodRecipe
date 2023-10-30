@@ -15,11 +15,11 @@ class Recipe {
             _name = value
         }
 
-    private var _idCategory: String? = ""
-    var idCategory
-        get() = _idCategory ?: ""
+    private var _idCategoryType: String? = ""
+    var idCategoryType
+        get() = _idCategoryType ?: ""
         set(value) {
-            _idCategory = value
+            _idCategoryType = value
         }
 
     private var _idUser: String? = ""
@@ -50,9 +50,9 @@ class Recipe {
             _image = value
         }
 
-    private var _timer: Int? = 0
+    private var _timer: Int?= 0
     var timer
-        get() = _timer ?: ""
+        get() = _timer ?: 0
         set(value) {
             _timer = value
         }
@@ -61,7 +61,7 @@ class Recipe {
     constructor(
         id: String,
         name: String,
-        idCategory: String,
+        idCategoryType: String,
         idUser: String,
         ingredient: String,
         date: String,
@@ -70,7 +70,7 @@ class Recipe {
     ) {
         this._id = id
         this._name = name
-        this._idCategory = idCategory
+        this._idCategoryType = idCategoryType
         this._idUser = idUser
         this._ingredient = ingredient
         this._date = date
@@ -80,7 +80,7 @@ class Recipe {
 
     constructor(
         name: String,
-        idCategory: String,
+        idCategoryType: String,
         idUser: String,
         ingredient: String,
         date: String,
@@ -88,7 +88,7 @@ class Recipe {
         timer: Int
     ) {
         this._name = name
-        this._idCategory = idCategory
+        this._idCategoryType = idCategoryType
         this._idUser = idUser
         this._ingredient = ingredient
         this._date = date

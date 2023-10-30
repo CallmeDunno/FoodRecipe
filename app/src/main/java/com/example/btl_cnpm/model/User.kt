@@ -44,6 +44,7 @@ class User {
             _totalFollowing = value
         }
 
+    constructor()
     constructor(
         username: String,
         password: String,
@@ -88,4 +89,13 @@ class User {
         this._password = password
         this._email = email
     }
+//    constructor(
+//        id: String,
+//        username: String,
+//        bio: String
+//    ) {
+//        this._id = id
+//        this._username = username
+//        this._bio = bio
+//    }
 }
