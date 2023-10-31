@@ -1,40 +1,40 @@
 package com.example.btl_cnpm.data.repository
 
 import android.util.Log
-import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
+import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 
-
-class HomeRepository @Inject constructor(private val fAuth: FirebaseAuth, private val fFireStore: FirebaseFirestore) {
-    private var listCategory = arrayListOf<Category>()
-
+class ProfileRepository @Inject constructor(private val fAuth: FirebaseAuth, private val fFireStore: FirebaseFirestore) {
     private var listRecipe = arrayListOf<Recipe>()
-
-    fun getCategoryList(result: (UIState<ArrayList<Category>>)-> Unit) {
-        listCategory.clear()
-        fFireStore.collection("CategoryType")
+    fun getUser(id: String, result: (UIState<User>) -> Unit) {
+//        val userId = SharedPreferencesManager().getString(id)
+        fFireStore.collection("User")
+            .document(id)
             .get()
             .addOnCompleteListener {
                 if(it.isSuccessful) {
-                    for(document in it.result) {
+                    val document = it.result
+                    if(document != null) {
                         val id = document.id
-                        val name = document.toObject(Category::class.java).name
-                        listCategory.add(Category(id, name))
+                        val username = document.toObject(User::class.java)!!.username
+                        val bio = document.toObject(User::class.java)!!.bio
+                        result.invoke(UIState.Success(User(id, username, bio)))
                     }
-                    result.invoke(UIState.Success(listCategory))
-                } else {
-                    Log.d("category", "get fail")
+                }
+                else {
+                    result.invoke(UIState.Failure("fail"))
                 }
             }
     }
 
-    fun getRecipeList(result: (UIState<ArrayList<Recipe>>) -> Unit) {
+    fun getMyRecipeList(id: String, result: (UIState<ArrayList<Recipe>>) -> Unit) {
         listRecipe.clear()
         fFireStore.collection("Recipe")
+            .whereEqualTo("idUser", id)
             .get()
             .addOnCompleteListener {
                 if(it.isSuccessful) {

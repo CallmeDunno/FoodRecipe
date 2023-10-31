@@ -1,6 +1,5 @@
 package com.example.btl_cnpm.ui.home.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,8 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.btl_cnpm.databinding.FoodRecipeLayoutItemRecipeBinding
 import com.example.btl_cnpm.model.Recipe
 
-class RecipeAdapter(val context: Context,
-                    val onItemClick:(String) -> Unit): ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(object : DiffUtil.ItemCallback<Recipe>() {
+class RecipeAdapter(val onItemClick:(String) -> Unit): ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(object : DiffUtil.ItemCallback<Recipe>() {
     override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
         return oldItem.id == newItem.id
     }
@@ -23,7 +21,7 @@ class RecipeAdapter(val context: Context,
 }){
     inner class RecipeViewHolder(private val binding: FoodRecipeLayoutItemRecipeBinding): RecyclerView.ViewHolder(binding.root) {
         fun onBind(recipe: Recipe) {
-            Glide.with(context).load(recipe.image).into(binding.imgRecipe)
+            Glide.with(binding.root.context).load(recipe.image).into(binding.imgRecipe)
             binding.txtRecipeName.text = recipe.name
             binding.txtRecipeMinute.text = "${recipe.timer}"
             binding.btnMark.setOnClickListener {

@@ -1,18 +1,14 @@
 package com.example.btl_cnpm.ui.home.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.btl_cnpm.R
 import com.example.btl_cnpm.databinding.FoodRecipeLayoutItemCategoryBinding
-import com.example.btl_cnpm.databinding.FoodRecipeLayoutItemRecipeBinding
 import com.example.btl_cnpm.model.Category
 
-class CategoryAdapter(val context: Context,
-                      val onItemClick: (String) -> Unit) : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(object: DiffUtil.ItemCallback<Category>() {
+class CategoryAdapter(val onItemClick: (String) -> Unit) : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(object: DiffUtil.ItemCallback<Category>() {
     override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
         return oldItem.id == newItem.id
     }

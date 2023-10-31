@@ -26,6 +26,7 @@
             android:paddingVertical="@dimen/_4sdp">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_20sdp"
@@ -39,7 +40,7 @@
                 android:textSize="@dimen/_11ssp" />
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/img_filter"
+                android:id="@+id/btn_filter"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:background="@drawable/bg_btn_green_padding_5"
@@ -67,6 +68,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="255 results"
