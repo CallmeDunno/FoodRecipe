@@ -16,10 +16,10 @@ class BookmarkViewModel @Inject constructor(private val repository: BookmarkLoca
 
     private lateinit var listItemBookmark: LiveData<List<BookmarkLocal>>
 
-    fun getAllItemBookmark(): LiveData<List<BookmarkLocal>> {
+    fun getAllItemBookmark(id: String): LiveData<List<BookmarkLocal>> {
         viewModelScope.launch {
             val def = async {
-                return@async repository.getAllItemBookmark()
+                return@async repository.getAllItemBookmark(id)
             }
             listItemBookmark = def.await()
         }

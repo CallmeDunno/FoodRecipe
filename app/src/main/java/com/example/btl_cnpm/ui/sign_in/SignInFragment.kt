@@ -44,16 +44,17 @@ class SignInFragment : BaseFragment<FoodRecipeFragmentSigninBinding>() {
                             is UIState.Success -> {
                                 if (it.data.isNotEmpty()) {
                                     if (cbRememberMeSignIn.isChecked) sharedPre.putString(
-                                        "idUser",
+                                        "idUserRemember",
                                         it.data
-                                    )
+                                    ) else {
+                                        sharedPre.putString("idUserTemp", it.data)
+                                    }
                                     requireView().findNavController()
                                         .popBackStack(R.id.login_navigation, true)
                                     requireView().findNavController().navigate(R.id.home_navigation)
                                 }
                             }
                             is UIState.Failure -> {
-                                notify(it.message + "")
                                 showDialogFail(requireContext().getString(R.string.login_fail))
                             }
                         }
