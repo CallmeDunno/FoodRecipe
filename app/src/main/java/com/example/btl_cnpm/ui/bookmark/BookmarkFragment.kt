@@ -38,8 +38,8 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
                 tvHeader.text = "Bookmark"
             }
             rcvBookmark.adapter = adapter
-            val idUser = sharedPre.getString("idUser") ?: ""
-            viewModel.getAllItemBookmark(idUser).observe(viewLifecycleOwner) {
+
+            viewModel.getAllItemBookmark(getIdUser()).observe(viewLifecycleOwner) {
                 if (it.isEmpty()) tvNullItem.show() else tvNullItem.hide()
                 adapter.submitList(it)
             }
@@ -90,6 +90,12 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
             }
 
         }).attachToRecyclerView(binding.rcvBookmark)
+    }
+
+    private fun getIdUser(): String {
+        val idRemember = sharedPre.getString("idUserRemember")
+        val idTemp = sharedPre.getString("idUserTemp")
+        return if (idRemember.isNullOrEmpty()) idTemp!! else idRemember
     }
 
 }
