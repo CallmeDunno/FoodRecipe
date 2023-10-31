@@ -18,7 +18,7 @@ class SplashFragment : BaseFragment<FoodRecipeFragmentSplashBinding>() {
     override fun initAction() {
         super.initAction()
         binding.btnStartSplash.setOnClickListener {
-            if (sharedPre.getString("idUser").isNullOrEmpty()) {
+            if (sharedPre.getString("idUserRemember").isNullOrEmpty()) {
                 requireView().findNavController().navigate(R.id.signInFragment)
             } else {
                 requireView().findNavController().popBackStack(R.id.login_navigation, true)
