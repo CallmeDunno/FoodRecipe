@@ -1,5 +1,7 @@
 package com.example.btl_cnpm.di
 
+import com.example.btl_cnpm.data.local.BookmarkLocalDao
+import com.example.btl_cnpm.data.local.BookmarkLocalRepository
 import com.example.btl_cnpm.data.repository.HomeRepository
 import com.example.btl_cnpm.data.repository.LoginRepository
 import com.example.btl_cnpm.data.repository.NewRecipeRepository
@@ -28,6 +30,14 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideNewRepository(fAuth: FirebaseAuth, fFireStore: FirebaseFirestore, fStorage: FirebaseStorage) =
+    fun provideNewRepository(
+        fAuth: FirebaseAuth,
+        fFireStore: FirebaseFirestore,
+        fStorage: FirebaseStorage
+    ) =
         NewRecipeRepository(fAuth, fFireStore, fStorage)
+
+    @Singleton
+    @Provides
+    fun provideBookmarkLocal(bookmarkDao: BookmarkLocalDao) = BookmarkLocalRepository(bookmarkDao)
 }
