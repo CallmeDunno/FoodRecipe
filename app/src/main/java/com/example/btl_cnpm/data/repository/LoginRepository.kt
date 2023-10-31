@@ -24,7 +24,7 @@ class LoginRepository @Inject constructor(
         fAuth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    result.invoke(UIState.Success("Email xác nhận đã được gửi. Vui lòng kiểm tra hộp thư đến của bạn."))
+                    result.invoke(UIState.Success("Confirmation email has been sent. Please check your inbox."))
                 } else {
                     result.invoke(UIState.Failure(task.exception?.message.toString()))
                 }
