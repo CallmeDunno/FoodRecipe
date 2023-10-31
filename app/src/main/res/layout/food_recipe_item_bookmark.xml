@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.btl_cnpm.model.Bookmark" />
+            type="com.example.btl_cnpm.data.local.BookmarkLocal" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_3sdp"
-                    android:text="@{item.timer}"
+                    android:text="@{item.timer + ` mins`}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintBottom_toBottomOf="@id/imgBookmarkRecipe"
@@ -101,7 +101,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins_medium"
                 android:maxLines="1"
-                android:text="@{`By `+item.author}"
+                android:text="@{`By `+item.creator}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/layoutMinutes"

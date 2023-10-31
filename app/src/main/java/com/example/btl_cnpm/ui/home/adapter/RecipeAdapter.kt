@@ -23,7 +23,7 @@ class RecipeAdapter(val onItemClick:(String) -> Unit): ListAdapter<Recipe, Recip
         fun onBind(recipe: Recipe) {
             Glide.with(binding.root.context).load(recipe.image).into(binding.imgRecipe)
             binding.txtRecipeName.text = recipe.name
-            binding.txtRecipeMinute.text = "${recipe.timer} mins"
+            binding.txtRecipeMinute.text = "${recipe.timer}"
             binding.btnMark.setOnClickListener {
 
             }

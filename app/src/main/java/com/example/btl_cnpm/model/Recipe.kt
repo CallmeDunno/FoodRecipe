@@ -50,9 +50,9 @@ class Recipe {
             _image = value
         }
 
-    private var _timer: Int?= 0
+    private var _timer: Int = 0
     var timer
-        get() = _timer ?: 0
+        get() = _timer
         set(value) {
             _timer = value
         }

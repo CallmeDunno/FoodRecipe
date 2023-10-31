@@ -6,17 +6,17 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.btl_cnpm.data.local.BookmarkLocal
 import com.example.btl_cnpm.databinding.FoodRecipeItemBookmarkBinding
-import com.example.btl_cnpm.model.Bookmark
 
 class BookmarkAdapter(private val onClick: (String) -> Unit) :
-    ListAdapter<Bookmark, BookmarkAdapter.BookmarkVH>(AsyncDifferConfig.Builder(object :
-        DiffUtil.ItemCallback<Bookmark>() {
-        override fun areItemsTheSame(oldItem: Bookmark, newItem: Bookmark): Boolean {
+    ListAdapter<BookmarkLocal, BookmarkAdapter.BookmarkVH>(AsyncDifferConfig.Builder(object :
+        DiffUtil.ItemCallback<BookmarkLocal>() {
+        override fun areItemsTheSame(oldItem: BookmarkLocal, newItem: BookmarkLocal): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Bookmark, newItem: Bookmark): Boolean {
+        override fun areContentsTheSame(oldItem: BookmarkLocal, newItem: BookmarkLocal): Boolean {
             return oldItem == newItem
         }
     }).build()) {
@@ -24,11 +24,11 @@ class BookmarkAdapter(private val onClick: (String) -> Unit) :
     inner class BookmarkVH(private val binding: FoodRecipeItemBookmarkBinding) :
         ViewHolder(binding.root) {
 
-        fun bindData(bookmark: Bookmark) {
+        fun bindData(bookmarkLocal: BookmarkLocal) {
             itemView.setOnClickListener {
-                onClick.invoke(bookmark.id)
+                onClick.invoke(bookmarkLocal.idRecipe)
             }
-            binding.item = bookmark
+            binding.item = bookmarkLocal
         }
 
     }

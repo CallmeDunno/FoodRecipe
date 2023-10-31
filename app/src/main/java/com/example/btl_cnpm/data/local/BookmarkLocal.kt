@@ -15,7 +15,7 @@ data class BookmarkLocal(
     @ColumnInfo(name = "Creator")
     val creator: String,
     @ColumnInfo(name = "Timer")
-    val timer: String,
+    val timer: Int,
     @ColumnInfo(name = "Rate")
     val rate: Float,
     @ColumnInfo(name = "Ingredient")
