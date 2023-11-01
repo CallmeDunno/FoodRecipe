@@ -32,7 +32,9 @@ class FoodRecipeActivity : BaseActivity<FoodRecipeActivityMainBinding>() {
                 R.id.splashFragment,
                 R.id.signInFragment,
                 R.id.signUpFragment,
-                R.id.forgotPasswordFragment -> binding.bottomNavigation.hide()
+                R.id.forgotPasswordFragment,
+                R.id.newRecipeFragment,
+                R.id.recipeFragment -> binding.bottomNavigation.hide()
                 else -> binding.bottomNavigation.show()
             }
         }

@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.example.btl_cnpm.model.Recipe" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,9 +46,11 @@
 
                     <ImageView
                         android:id="@+id/imgFoodRecipe"
+                        set_image_by_url="@{item.image}"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
                         android:background="@color/background_null"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,6 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_3sdp"
+                        android:text="@{item.timer + ` mins`}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16ssp"
                         app:layout_constraintBottom_toBottomOf="@id/imgBookmarkRecipe"
@@ -150,11 +156,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/app_name"
+            android:text="@{item.name}"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/layoutImageRecipe" />
 
@@ -170,6 +176,8 @@
                 android:id="@+id/imgAvatarAuthorRecipe"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
+                android:scaleType="centerCrop"
+                android:src="@color/transparent"
                 app:civ_circle_background_color="@color/black_600"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -228,72 +236,55 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tvTitleIngredientRecipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingredient"
-            app:layout_constraintTop_toBottomOf="@id/layoutAuthor"
             android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:fontFamily="@font/poppins_medium"
-            android:textSize="@dimen/_14ssp"
+            android:text="Ingredient"
             android:textColor="@color/black"
-            android:id="@+id/tvTitleIngredientRecipe"
-            android:layout_marginTop="@dimen/_8sdp" />
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/layoutAuthor" />
 
         <TextView
+            android:id="@+id/tvIngredientRecipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="4"
             android:paddingVertical="@dimen/_3sdp"
             android:scrollbarSize="@dimen/_1sdp"
             android:scrollbars="vertical"
-            android:maxLines="4"
-            android:id="@+id/tvIngredientRecipe"
-            android:fontFamily="@font/poppins_medium"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleIngredientRecipe"/>
+            android:text="@{item.ingredient}"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleIngredientRecipe" />
 
-        <LinearLayout
-            android:id="@+id/layoutItemCountRecipe"
+        <TextView
+            android:id="@+id/tvTitleProcedureRecipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginVertical="@dimen/_5sdp"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            app:layout_constraintTop_toBottomOf="@id/tvIngredientRecipe">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/ic_cook"
-                android:drawablePadding="@dimen/_5sdp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Procedure"
-                android:textAlignment="textStart"
-                android:textSize="@dimen/_12ssp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/tvTotalStepsRecipe"
-                android:fontFamily="@font/poppins_medium"
-                android:text="10 Items"
-                android:textAlignment="textEnd"
-                android:textSize="@dimen/_12ssp" />
-
-        </LinearLayout>
+            android:drawableStart="@drawable/ic_cook"
+            android:drawablePadding="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Procedure"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvIngredientRecipe" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvProcedureRecipe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:overScrollMode="never"
             android:layout_marginTop="@dimen/_3sdp"
+            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutItemCountRecipe"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleProcedureRecipe"
             tools:listitem="@layout/food_recipe_item_step" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

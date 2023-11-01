@@ -1,6 +1,7 @@
 package com.example.btl_cnpm.ui.bookmark
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.btl_cnpm.R
@@ -25,7 +26,7 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
 
     private val adapter by lazy {
         BookmarkAdapter {
-            notify(it)
+            findNavController().navigate(BookmarkFragmentDirections.actionBookmarkFragmentToRecipeFragment(it))
         }
     }
 

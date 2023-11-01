@@ -6,11 +6,6 @@ import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class SearchRepository @Inject constructor(private val fFireStore: FirebaseFirestore) {
@@ -53,10 +48,11 @@ class SearchRepository @Inject constructor(private val fFireStore: FirebaseFires
                         val date = document.toObject(Recipe::class.java).date
                         val image = document.toObject(Recipe::class.java).image
                         val timer = document.toObject(Recipe::class.java).timer
+                        val rate = document.toObject(Recipe::class.java).rate
                         getUserByRecipe(idUser) {result ->
                             when(result) {
                                 is UIState.Success -> {
-                                    userRecipeMap[Recipe(id, name, idCategoryType, idUser, ingredient, date, image, timer)] = result.data
+                                    userRecipeMap[Recipe(id, name, idCategoryType, idUser, ingredient, date, image, timer, rate)] = result.data
                                 }
                                 is UIState.Failure -> {
                                     result.message?.let {mes->

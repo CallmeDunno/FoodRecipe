@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.btl_cnpm.FoodRecipeApplication
+import androidx.navigation.fragment.findNavController
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentHomeBinding
@@ -52,12 +53,12 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
     }
     private val newRecipeAdapter by lazy {
         NewRecipeAdapter(onItemCLick = {
-
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRecipeFragment(it))
         })
     }
     private val recipeAdapter by lazy {
         RecipeAdapter(onItemClick = {
-
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRecipeFragment(it))
         })
     }
 

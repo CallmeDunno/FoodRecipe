@@ -57,6 +57,13 @@ class Recipe {
             _timer = value
         }
 
+    private var _rate: Float = 0.0f
+    var rate
+        get() = _rate
+        set(value) {
+            _rate = value
+        }
+
     constructor()
     constructor(
         id: String,
@@ -66,7 +73,8 @@ class Recipe {
         ingredient: String,
         date: String,
         image: String,
-        timer: Int
+        timer: Int,
+        rate: Float
     ) {
         this._id = id
         this._name = name
@@ -76,7 +84,9 @@ class Recipe {
         this._date = date
         this._image = image
         this._timer = timer
+        this._rate = rate
     }
+
     constructor(
         name: String,
         idCategoryType: String,
@@ -84,7 +94,8 @@ class Recipe {
         ingredient: String,
         date: String,
         image: String,
-        timer: Int
+        timer: Int,
+        rate: Float
     ) {
         this._name = name
         this._idCategoryType = idCategoryType
@@ -93,7 +104,9 @@ class Recipe {
         this._date = date
         this._image = image
         this._timer = timer
+        this._rate = rate
     }
+
     constructor(
         id: String,
         name: String,
