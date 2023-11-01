@@ -1,12 +1,9 @@
 package com.example.btl_cnpm.ui.search
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -16,18 +13,14 @@ import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentSearchBinding
 import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
+import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
 import com.example.btl_cnpm.ui.search.adapter.FilterAdapter
 import com.example.btl_cnpm.ui.search.adapter.SearchRecipeAdapter
-import com.example.btl_cnpm.ui.sign_up.SignUpViewModel
 import com.example.btl_cnpm.utils.FoodEntity
 import com.example.btl_cnpm.utils.UIState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
@@ -35,7 +28,7 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
 
     private var filterTime: Int? = 0
     private var filterRate: Int? = 0
-    private var listCategory = arrayListOf<Category>()
+    private var userRecipeMap = hashMapOf<Recipe, User>()
     private val searchViewModel by viewModels<SearchViewModel>()
     private val searchRecipeAdapter by lazy {
         SearchRecipeAdapter(onItemClick = {
@@ -64,7 +57,7 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
         super.initView()
         binding.apply {
             headerSearch.tvHeader.text = binding.root.context.getString(R.string.search)
-            headerSearch.btnBackHeader.setOnClickListener{
+            headerSearch.btnBackHeader.setOnClickListener {
                 requireView().findNavController().popBackStack()
             }
             headerSearch.btnMoreHeader.visibility = View.GONE
@@ -76,7 +69,30 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     override fun initAction() {
         super.initAction()
         binding.apply {
-            listCategory.clear()
+            arguments?.let {
+                edtSearch.setText(it.getString("edtSearch"))
+            }
+
+            searchViewModel.getRecipeByName().observe(requireActivity()) { result ->
+                when (result) {
+                    is UIState.Success -> {
+                        userRecipeMap = result.data
+                        edtSearch.text?.let {
+                            if (it.isNotEmpty()) {
+                                searchRecipeAdapter.submitList(userRecipeMap.entries.filter { entry ->
+                                    entry.key.name.contains(it.toString(), true)
+                                })
+                            } else {
+                                searchRecipeAdapter.submitList(userRecipeMap.entries.toList())
+                            }
+                        }
+                    }
+
+                    is UIState.Failure -> {
+                        showDialogFail(result.message.toString())
+                    }
+                }
+            }
 
             btnFilter.setOnClickListener {
                 filterDialog()
@@ -89,56 +105,18 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     p0?.let {
-                        if (p0.isNotEmpty()) {
-                            searchViewModel.getRecipes().observe(requireActivity()) { arr ->
-                                when (arr) {
-                                    is UIState.Success -> {
-                                        val listRecipe = arr.data.filter { recipe ->
-                                            recipe.name.contains(p0.toString(), true)
-                                        }
-                                        searchRecipeAdapter.submitList(listRecipe)
-                                        txtResult.text = "${listRecipe.size} results"
-                                        txtResult.visibility = View.VISIBLE
-                                    }
-
-                                    is UIState.Failure -> {
-                                        showDialogFail("Please restart")
-                                    }
-                                }
-                            }
-                        }
+                        searchRecipeAdapter.submitList(userRecipeMap.entries.filter { entry ->
+                            entry.key.name.contains(it.toString(), true)
+                        })
                     }
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
-
                 }
             }
             )
 
-            searchViewModel.getRecipes().observe(requireActivity()) {
-                when (it) {
-                    is UIState.Success -> {
-                        searchRecipeAdapter.submitList(it.data)
-                    }
 
-                    is UIState.Failure -> {
-                        showDialogFail("Please restart")
-                    }
-                }
-            }
-
-            searchViewModel.getCategory().observe(requireActivity()) {
-                when (it) {
-                    is UIState.Success -> {
-                        listCategory = it.data
-                    }
-
-                    is UIState.Failure -> {
-                        showDialogFail("Please restart")
-                    }
-                }
-            }
         }
     }
 
@@ -170,12 +148,21 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
                 FoodEntity.FIVE_STAR
             )
         )
+        rvCategory.adapter = categoryAdapter
+        searchViewModel.getCategory().observe(requireActivity()) {
+            when (it) {
+                is UIState.Success -> {
+                    categoryAdapter.submitList(it.data)
+                }
 
+                is UIState.Failure -> {
+                    showDialogFail(it.message.toString())
+                }
+            }
+        }
         btnFilter.setOnClickListener {
 
         }
-        rvCategory.adapter = categoryAdapter
-        categoryAdapter.submitList(listCategory)
         dialog.setCancelable(true)
         dialog.setContentView(view)
         dialog.show()

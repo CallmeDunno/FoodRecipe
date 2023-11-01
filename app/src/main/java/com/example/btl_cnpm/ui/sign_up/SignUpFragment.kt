@@ -34,11 +34,22 @@ class SignUpFragment : BaseFragment<FoodRecipeFragmentSignupBinding>() {
                 }
                 if(password.contentEquals(edtConfirmPassword.text)) {
                     if(Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        signUpViewModel.signUp(username, email, password).observe(requireActivity()) {
+                        signUpViewModel.signUp(email, password).observe(requireActivity()) {
                             when(it) {
                                 is UIState.Success -> {
                                     notify(requireContext().getString(R.string.sign_up_successfully))
-                                    requireView().findNavController().navigate(R.id.signInFragment)
+                                    signUpViewModel.createUser(it.data[0], username, email, password, it.data[1]).observe(requireActivity()) { result ->
+                                        when(result) {
+                                            is UIState.Success -> {
+                                                requireView().findNavController().navigate(R.id.signInFragment)
+                                            }
+                                            is UIState.Failure -> {
+                                                result.message?.let {mes ->
+                                                    showDialogFail(mes)
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                                 is UIState.Failure -> {
                                     it.message?.let {mes ->

@@ -7,6 +7,7 @@ import com.example.btl_cnpm.data.repository.LoginRepository
 import com.example.btl_cnpm.data.repository.SearchRepository
 import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
+import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,25 +26,13 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
         return mutableLiveData
     }
 
-    fun getRecipes(): MutableLiveData<UIState<ArrayList<Recipe>>> {
-        val mutableLiveData = MutableLiveData<UIState<ArrayList<Recipe>>>()
+    fun getRecipeByName(): MutableLiveData<UIState<HashMap<Recipe, User>>> {
+        val mutableLiveData = MutableLiveData<UIState<HashMap<Recipe, User>>>()
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getRecipeList {
+            repository.getRecipeByName {
                 mutableLiveData.postValue(it)
             }
         }
         return mutableLiveData
     }
-
-    fun getRecipesByName(input: String): MutableLiveData<UIState<ArrayList<Recipe>>> {
-        val mutableLiveData = MutableLiveData<UIState<ArrayList<Recipe>>>()
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getRecipeByName(input = input) {
-                mutableLiveData.postValue(it)
-            }
-        }
-        return mutableLiveData
-    }
-
-
 }

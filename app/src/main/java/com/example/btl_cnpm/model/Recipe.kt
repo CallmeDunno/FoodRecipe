@@ -77,7 +77,6 @@ class Recipe {
         this._image = image
         this._timer = timer
     }
-
     constructor(
         name: String,
         idCategoryType: String,
@@ -94,5 +93,16 @@ class Recipe {
         this._date = date
         this._image = image
         this._timer = timer
+    }
+    constructor(
+        id: String,
+        name: String,
+        idUser: String,
+        image: String,
+    ) {
+        this._id = id
+        this._name = name
+        this._idUser = idUser
+        this._image = image
     }
 }
