@@ -4,32 +4,13 @@ import android.util.Log
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObject
 import javax.inject.Inject
 
-class ProfileRepository @Inject constructor(private val fAuth: FirebaseAuth, private val fFireStore: FirebaseFirestore) {
+class ProfileRepository @Inject constructor(private val fFireStore: FirebaseFirestore) {
     private var listRecipe = arrayListOf<Recipe>()
-    fun getUser(id: String, result: (UIState<User>) -> Unit) {
-//        val userId = SharedPreferencesManager().getString(id)
-        fFireStore.collection("User")
-            .document(id)
-            .get()
-            .addOnCompleteListener {
-                if(it.isSuccessful) {
-                    val document = it.result
-                    if(document != null) {
-                        val id = document.id
-                        val username = document.toObject(User::class.java)!!.username
-                        val bio = document.toObject(User::class.java)!!.bio
-                        result.invoke(UIState.Success(User(id, username, bio)))
-                    }
-                }
-                else {
-                    result.invoke(UIState.Failure("fail"))
-                }
-            }
-    }
+    private var listUser = arrayListOf<User>()
 
     fun getMyRecipeList(id: String, result: (UIState<ArrayList<Recipe>>) -> Unit) {
         listRecipe.clear()
@@ -51,7 +32,36 @@ class ProfileRepository @Inject constructor(private val fAuth: FirebaseAuth, pri
                     }
                     result.invoke(UIState.Success(listRecipe))
                 } else {
-                    Log.d("recipe", "fail")
+                    result.invoke(UIState.Failure(it.exception?.message))
+                }
+            }
+    }
+
+
+
+    fun getUser(id: String, result: (UIState<User>) -> Unit) {
+        listUser.clear()
+        fFireStore.collection("User")
+            .whereEqualTo("id", id)
+            .get()
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    for(doc in it.result) {
+                        val id = doc.toObject(User::class.java).id
+                        val username = doc.toObject(User::class.java).username
+                        val image = doc.toObject(User::class.java).image
+                        listUser.add(User(id, username, image))
+                    }
+                    if(listUser.isNotEmpty()) {
+                        Log.d("tung", "has user")
+                        result.invoke(UIState.Success(listUser[0]))
+                    }
+                    else {
+                        Log.d("tung", "dont have user")
+                        result.invoke(UIState.Failure(it.exception?.message))
+                    }
+                } else {
+                    result.invoke(UIState.Failure(it.exception?.message))
                 }
             }
     }

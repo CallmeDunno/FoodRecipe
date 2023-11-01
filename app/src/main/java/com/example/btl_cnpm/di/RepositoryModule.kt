@@ -5,6 +5,8 @@ import com.example.btl_cnpm.data.local.BookmarkLocalRepository
 import com.example.btl_cnpm.data.repository.HomeRepository
 import com.example.btl_cnpm.data.repository.LoginRepository
 import com.example.btl_cnpm.data.repository.NewRecipeRepository
+import com.example.btl_cnpm.data.repository.ProfileRepository
+import com.example.btl_cnpm.data.repository.SearchRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -27,6 +29,16 @@ class RepositoryModule {
     @Provides
     fun provideHomeRepository(fAuth: FirebaseAuth, fFireStore: FirebaseFirestore) =
         HomeRepository(fAuth, fFireStore)
+
+    @Singleton
+    @Provides
+    fun provideSearchRepository(fFireStore: FirebaseFirestore) =
+        SearchRepository(fFireStore)
+
+    @Singleton
+    @Provides
+    fun provideProfileRepository(fFireStore: FirebaseFirestore) =
+        ProfileRepository(fFireStore)
 
     @Singleton
     @Provides

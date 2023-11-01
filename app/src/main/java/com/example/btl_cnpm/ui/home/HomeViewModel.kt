@@ -1,5 +1,6 @@
 package com.example.btl_cnpm.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.example.btl_cnpm.data.repository.HomeRepository
 import com.example.btl_cnpm.data.repository.LoginRepository
 import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
+import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +31,26 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         val mutableLiveData = MutableLiveData<UIState<ArrayList<Recipe>>>()
         viewModelScope.launch(Dispatchers.IO) {
             repository.getRecipeList {
+                mutableLiveData.postValue(it)
+            }
+        }
+        return mutableLiveData
+    }
+
+    fun getUser(id: String): MutableLiveData<UIState<User>> {
+        val mutableLiveData = MutableLiveData<UIState<User>>()
+        viewModelScope.launch(Dispatchers.Default) {
+            repository.getUser(id) {
+                mutableLiveData.postValue(it)
+            }
+        }
+        return mutableLiveData
+    }
+
+    fun getRecipeUserList(): MutableLiveData<UIState<HashMap<Recipe, User>>> {
+        val mutableLiveData = MutableLiveData<UIState<HashMap<Recipe, User>>>()
+        viewModelScope.launch(Dispatchers.Default) {
+            repository.getRecipeUserList {
                 mutableLiveData.postValue(it)
             }
         }

@@ -31,6 +31,14 @@ class User {
         set(value) {
             _bio = value
         }
+
+    private var _image: String? = ""
+    var image
+        get() = _image ?: ""
+        set(value) {
+            _image = value
+        }
+
     private var _totalFollower: Int = 0
     var follower
         get() = _totalFollower
@@ -50,6 +58,7 @@ class User {
         password: String,
         email: String,
         bio: String = "",
+        image: String = "",
         follower: Int = 0,
         following: Int = 0
     ) {
@@ -68,6 +77,7 @@ class User {
         password: String,
         email: String,
         bio: String = "",
+        image: String,
         follower: Int = 0,
         following: Int = 0
     ) {
@@ -76,26 +86,18 @@ class User {
         this._password = password
         this._email = email
         this._bio = bio
+        this._image = image
         this._totalFollower = follower
         this._totalFollowing = following
     }
 
     constructor(
+        id: String,
         username: String,
-        password: String,
-        email: String
+        image: String,
     ) {
+        this._id = id
         this._username = username
-        this._password = password
-        this._email = email
+        this._image = image
     }
-//    constructor(
-//        id: String,
-//        username: String,
-//        bio: String
-//    ) {
-//        this._id = id
-//        this._username = username
-//        this._bio = bio
-//    }
 }
