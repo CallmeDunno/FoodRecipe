@@ -16,42 +16,35 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 
-class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Recipe, NewRecipeAdapter.NewRecipeViewHolder>(object : DiffUtil.ItemCallback<Recipe>() {
-    override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem.id == newItem.id
+class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Map.Entry<Recipe, User>, NewRecipeAdapter.NewRecipeViewHolder>(object : DiffUtil.ItemCallback<Map.Entry<Recipe, User>>() {
+    override fun areItemsTheSame(
+        oldItem: Map.Entry<Recipe, User>,
+        newItem: Map.Entry<Recipe, User>
+    ): Boolean {
+        return oldItem.value.id == newItem.value.id && oldItem.key.id == newItem.key.id
     }
 
-    override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem.id == newItem.id
+    override fun areContentsTheSame(
+        oldItem: Map.Entry<Recipe, User>,
+        newItem: Map.Entry<Recipe, User>
+    ): Boolean {
+        return oldItem.value.id == newItem.value.id && oldItem.key.id == newItem.key.id
     }
+
 
 }) {
     inner class NewRecipeViewHolder(private val binding: FoodRecipeLayoutNewRecipeBinding): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(recipe: Recipe) {
+        fun onBind(recipe: Map.Entry<Recipe, User>) {
             val context = binding.root.context
-            val firestore = FirebaseFirestore.getInstance()
-            Glide.with(context).load(recipe.image).into(binding.imgRecipe)
-            binding.txtRecipeName.text = recipe.name
-            binding.txtRecipeMinute.text = "${recipe.timer} mins"
-            if(recipe.idUser.isNotEmpty()) {
-                firestore.collection("User")
-                    .document(recipe.idUser)
-                    .get()
-                    .addOnCompleteListener {
-                        if(it.isSuccessful) {
-                            if(it.result != null) {
-                                binding.txtCreatorName.text =  "By ${it.result.toObject(User::class.java)!!.username}"
-                            }
-                        } else {
-                            binding.txtCreatorName.text = context.getString(R.string.by_unknown)
-                        }
-                    }
-            } else {
-                binding.txtCreatorName.text = context.getString(R.string.by_unknown)
+            Glide.with(context).load(recipe.key.image).into(binding.imgRecipe)
+            binding.txtRecipeName.text = recipe.key.name
+            binding.txtRecipeMinute.text = "${recipe.key.timer} mins"
+            binding.txtCreatorName.text = recipe.value.username
+            if(recipe.value.image.isNotEmpty()) {
+                Glide.with(context).load(recipe.value.image).into(binding.imgCreatorAvatar)
             }
-
             itemView.setOnClickListener {
-                onItemCLick.invoke(recipe.id)
+                onItemCLick.invoke(recipe.key.id)
             }
         }
     }
@@ -68,4 +61,5 @@ class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Recipe, N
     override fun onBindViewHolder(holder: NewRecipeViewHolder, position: Int) {
         holder.onBind(getItem(position))
     }
+
 }

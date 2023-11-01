@@ -12,10 +12,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private val repository: LoginRepository) : ViewModel() {
-    fun signUp(username: String, email: String, password: String): MutableLiveData<UIState<String>> {
+    fun signUp(email: String, password: String): MutableLiveData<UIState<ArrayList<String>>> {
+        val mutableLiveData = MutableLiveData<UIState<ArrayList<String>>>()
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.signUp(email, password) {
+                mutableLiveData.postValue(it)
+            }
+        }
+        return mutableLiveData
+    }
+
+    fun createUser(id: String, username: String, email: String, password: String, img: String): MutableLiveData<UIState<String>> {
         val mutableLiveData = MutableLiveData<UIState<String>>()
-        viewModelScope.launch(Dispatchers.Main) {
-            repository.signUp(username, email, password) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.createUserCloud(id, username, email, password, img) {
                 mutableLiveData.postValue(it)
             }
         }

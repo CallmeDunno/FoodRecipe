@@ -12,41 +12,30 @@ import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 
-class SearchRecipeAdapter(val onItemClick: (String) -> Unit): ListAdapter<Recipe, SearchRecipeAdapter.SearchRecipeViewHolder>(object: DiffUtil.ItemCallback<Recipe>() {
-    override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem.id == newItem.id
+class SearchRecipeAdapter(val onItemClick: (String) -> Unit): ListAdapter<Map.Entry<Recipe, User>, SearchRecipeAdapter.SearchRecipeViewHolder>(object: DiffUtil.ItemCallback<Map.Entry<Recipe, User>>() {
+    override fun areItemsTheSame(
+        oldItem: Map.Entry<Recipe, User>,
+        newItem: Map.Entry<Recipe, User>
+    ): Boolean {
+        return oldItem.value.id == newItem.value.id && oldItem.key.idUser == newItem.key.id && oldItem.key.id == newItem.key.id
     }
 
-    override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem.id == newItem.id
+    override fun areContentsTheSame(
+        oldItem: Map.Entry<Recipe, User>,
+        newItem: Map.Entry<Recipe, User>
+    ): Boolean {
+        return oldItem.value.id == newItem.value.id && oldItem.key.idUser == newItem.key.id && oldItem.key.id == newItem.key.id
     }
+
 
 }) {
     inner class SearchRecipeViewHolder(private val binding: FoodRecipeLayoutItemSearchRecipeBinding): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(recipe: Recipe) {
-            val context = binding.root.context
-            val fFirestore = FirebaseFirestore.getInstance()
-            Glide.with(binding.root.context).load(recipe.image).into(binding.imgRecipe)
-            binding.txtRecipeName.text = recipe.name
-            if(recipe.idUser.isNotEmpty()) {
-                fFirestore.collection("User")
-                    .document(recipe.idUser)
-                    .get()
-                    .addOnCompleteListener {
-                        if(it.isSuccessful) {
-                            if(it.result != null) {
-                                binding.txtCreatorName.text = "By ${it.result.toObject(User::class.java)!!.username}"
-                            }
-                        } else {
-                            binding.txtCreatorName.text = context.getString(R.string.by_unknown)
-                        }
-                    }
-            } else {
-                binding.txtCreatorName.text = context.getString(R.string.by_unknown)
-            }
-
+        fun onBind(recipe: Map.Entry<Recipe, User>) {
+            Glide.with(binding.root.context).load(recipe.key.image).into(binding.imgRecipe)
+            binding.txtRecipeName.text = recipe.key.name
+            binding.txtCreatorName.text = "By ${recipe.value.username}"
             itemView.setOnClickListener {
-                onItemClick.invoke(recipe.id)
+                onItemClick.invoke(recipe.key.id)
             }
         }
     }
