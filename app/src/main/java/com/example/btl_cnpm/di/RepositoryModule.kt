@@ -5,6 +5,7 @@ import com.example.btl_cnpm.data.local.BookmarkLocalRepository
 import com.example.btl_cnpm.data.repository.HomeRepository
 import com.example.btl_cnpm.data.repository.LoginRepository
 import com.example.btl_cnpm.data.repository.NewRecipeRepository
+import com.example.btl_cnpm.data.repository.RecipeRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -39,5 +40,10 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideBookmarkLocal(bookmarkDao: BookmarkLocalDao) = BookmarkLocalRepository(bookmarkDao)
+    fun provideBookmarkLocalRepository(bookmarkDao: BookmarkLocalDao) =
+        BookmarkLocalRepository(bookmarkDao)
+
+    @Singleton
+    @Provides
+    fun provideRecipeRepository(fFireStore: FirebaseFirestore) = RecipeRepository(fFireStore)
 }

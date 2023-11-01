@@ -1,8 +1,8 @@
 package com.example.btl_cnpm.ui.home
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentHomeBinding
@@ -10,7 +10,6 @@ import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
 import com.example.btl_cnpm.ui.home.adapter.NewRecipeAdapter
 import com.example.btl_cnpm.ui.home.adapter.RecipeAdapter
-import com.example.btl_cnpm.ui.sign_in.SignInViewModel
 import com.example.btl_cnpm.utils.UIState
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,12 +39,12 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
     }
     private val newRecipeAdapter by lazy {
         NewRecipeAdapter(onItemCLick = {
-
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRecipeFragment(it))
         })
     }
     private val recipeAdapter by lazy {
         RecipeAdapter(onItemClick = {
-
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRecipeFragment(it))
         })
     }
     override fun initAction() {
