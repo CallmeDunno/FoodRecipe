@@ -40,7 +40,7 @@ class ForgotPasswordFragment : BaseFragment<FoodRecipeFragmentForgotPasswordBind
                 if (email.isNotEmpty()) {
                     viewModel.sendResetPasswordEmail(email)
                 } else {
-                    Toast.makeText(requireContext(), "Vui lòng nhập Email", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Please enter Email.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -50,9 +50,9 @@ class ForgotPasswordFragment : BaseFragment<FoodRecipeFragmentForgotPasswordBind
         super.onViewCreated(view, savedInstanceState)
         viewModel.isResetEmailSent.observe(viewLifecycleOwner, Observer { isSent ->
             if (isSent) {
-                Toast.makeText(requireContext(), "Email đặt lại mật khẩu đã được gửi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Password reset email has been sen.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Không thể gửi email hãy kiểm tra lại", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Unable to send email, please check again.", Toast.LENGTH_SHORT).show()
             }
         })
     }

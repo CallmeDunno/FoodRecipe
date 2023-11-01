@@ -8,16 +8,20 @@ import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.data.local.BookmarkLocal
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentBookmarkBinding
 import com.example.btl_cnpm.ui.bookmark.adapter.BookmarkAdapter
+import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.extensions.hide
 import com.example.btl_cnpm.utils.extensions.show
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_bookmark
 
     private val viewModel by viewModels<BookmarkViewModel>()
+
+    @Inject lateinit var sharedPre: SharedPreferencesManager
 
     private val adapter by lazy {
         BookmarkAdapter {
@@ -34,7 +38,8 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
                 tvHeader.text = "Bookmark"
             }
             rcvBookmark.adapter = adapter
-            viewModel.getAllItemBookmark().observe(viewLifecycleOwner) {
+
+            viewModel.getAllItemBookmark(getIdUser()).observe(viewLifecycleOwner) {
                 if (it.isEmpty()) tvNullItem.show() else tvNullItem.hide()
                 adapter.submitList(it)
             }
@@ -85,6 +90,12 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
             }
 
         }).attachToRecyclerView(binding.rcvBookmark)
+    }
+
+    private fun getIdUser(): String {
+        val idRemember = sharedPre.getString("idUserRemember")
+        val idTemp = sharedPre.getString("idUserTemp")
+        return if (idRemember.isNullOrEmpty()) idTemp!! else idRemember
     }
 
 }

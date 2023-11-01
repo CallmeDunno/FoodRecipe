@@ -7,18 +7,25 @@ import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 
 
-class LoginRepository @Inject constructor(private val fAuth: FirebaseAuth, private val fFireStore: FirebaseFirestore) {
+class LoginRepository @Inject constructor(
+    private val fAuth: FirebaseAuth,
+    private val fFireStore: FirebaseFirestore
+) {
 
     fun signIn(email: String, password: String, result: (UIState<String>) -> Unit) {
         fAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { result.invoke(UIState.Success(it.result.user?.uid.toString())) }
+            .addOnCompleteListener {
+                if (it.isSuccessful) result.invoke(UIState.Success(it.result.user?.uid.toString()))
+                else result.invoke(UIState.Failure(it.exception.toString()))
+            }
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
+
     fun forgotPassword(email: String, result: (UIState<String>) -> Unit) {
         fAuth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    result.invoke(UIState.Success("Email xác nhận đã được gửi. Vui lòng kiểm tra hộp thư đến của bạn."))
+                    result.invoke(UIState.Success("Confirmation email has been sent. Please check your inbox."))
                 } else {
                     result.invoke(UIState.Failure(task.exception?.message.toString()))
                 }
@@ -54,6 +61,7 @@ class LoginRepository @Inject constructor(private val fAuth: FirebaseAuth, priva
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
                     result.invoke(UIState.Success(task.isSuccessful.toString()))
+
                 } else {
                     result.invoke(UIState.Failure(task.result.toString()))
                 }

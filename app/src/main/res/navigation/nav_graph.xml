@@ -15,13 +15,25 @@
             tools:layout="@layout/food_recipe_fragment_splash">
             <action
                 android:id="@+id/action_splashFragment_to_signUpFragment2"
-                app:destination="@id/signUpFragment" />
+                app:destination="@id/signUpFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_splashFragment_to_signInFragment2"
-                app:destination="@id/signInFragment" />
+                app:destination="@id/signInFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_global_homeFragment"
-                app:destination="@id/home_navigation" />
+                app:destination="@id/home_navigation"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/signUpFragment"
@@ -30,7 +42,11 @@
             tools:layout="@layout/food_recipe_fragment_signup">
             <action
                 android:id="@+id/action_signUpFragment_to_signInFragment2"
-                app:destination="@id/signInFragment" />
+                app:destination="@id/signInFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/signInFragment"
@@ -39,13 +55,25 @@
             tools:layout="@layout/food_recipe_fragment_signin">
             <action
                 android:id="@+id/action_signInFragment_to_signUpFragment2"
-                app:destination="@id/signUpFragment" />
+                app:destination="@id/signUpFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_global_homeFragment"
-                app:destination="@id/home_navigation" />
+                app:destination="@id/home_navigation"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
-                app:destination="@id/forgotPasswordFragment" />
+                app:destination="@id/forgotPasswordFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/forgotPasswordFragment"
@@ -54,7 +82,11 @@
             tools:layout="@layout/food_recipe_fragment_forgot_password">
             <action
                 android:id="@+id/action_forgotPasswordFragment_to_signUpFragment"
-                app:destination="@id/signUpFragment" />
+                app:destination="@id/signUpFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
     </navigation>
     <navigation
@@ -67,13 +99,25 @@
             tools:layout="@layout/food_recipe_fragment_home">
             <action
                 android:id="@+id/action_homeFragment_to_bookmarkFragment"
-                app:destination="@id/bookmarkFragment" />
+                app:destination="@id/bookmarkFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_homeFragment_to_profileFragment"
-                app:destination="@id/profileFragment" />
+                app:destination="@id/profileFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_homeFragment_to_searchFragment"
-                app:destination="@id/searchFragment" />
+                app:destination="@id/searchFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/bookmarkFragment"
@@ -87,7 +131,11 @@
             tools:layout="@layout/food_recipe_fragment_search">
             <action
                 android:id="@+id/action_searchFragment_to_recipeFragment"
-                app:destination="@id/recipeFragment" />
+                app:destination="@id/recipeFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/recipeFragment"
@@ -101,7 +149,11 @@
             tools:layout="@layout/food_recipe_fragment_profile">
             <action
                 android:id="@+id/action_profileFragment_to_newRecipeFragment"
-                app:destination="@id/newRecipeFragment" />
+                app:destination="@id/newRecipeFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/newRecipeFragment"
