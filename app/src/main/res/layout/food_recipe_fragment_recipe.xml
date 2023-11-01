@@ -50,6 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
                         android:background="@color/background_null"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,11 +156,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
             android:fontFamily="@font/poppins_medium"
             android:text="@{item.name}"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/layoutImageRecipe" />
 
@@ -175,6 +176,8 @@
                 android:id="@+id/imgAvatarAuthorRecipe"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
+                android:scaleType="centerCrop"
+                android:src="@color/transparent"
                 app:civ_circle_background_color="@color/black_600"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,6 @@ import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(private val fFireStore: FirebaseFirestore) {
@@ -28,7 +27,8 @@ class ProfileRepository @Inject constructor(private val fFireStore: FirebaseFire
                         val date = document.toObject(Recipe::class.java).date
                         val image = document.toObject(Recipe::class.java).image
                         val timer = document.toObject(Recipe::class.java).timer
-                        listRecipe.add(Recipe(id, name, idCategoryType, idUser, ingredient, date, image, timer))
+                        val rate = document.toObject(Recipe::class.java).rate
+                        listRecipe.add(Recipe(id, name, idCategoryType, idUser, ingredient, date, image, timer, rate))
                     }
                     result.invoke(UIState.Success(listRecipe))
                 } else {

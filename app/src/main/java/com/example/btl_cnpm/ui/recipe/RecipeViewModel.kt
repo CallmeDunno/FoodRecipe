@@ -46,4 +46,32 @@ class RecipeViewModel @Inject constructor(private val repository: RecipeReposito
         }
     }
 
+    private val _stateRate = MutableLiveData<UIState<String>>()
+    val stateRate get() = _stateRate
+
+    fun updateRate(idRecipe: String, idUser: String, rate: Int) {
+        viewModelScope.launch {
+            repository.insertRate(idRecipe, idUser, rate) { insertRateState ->
+                when (insertRateState) {
+                    is UIState.Success -> {
+                        repository.getAllRateById(idRecipe){ getAllItemState ->
+                            when(getAllItemState) {
+                                is UIState.Success -> {
+                                    repository.updateRateInRecipe(idRecipe, getAllItemState.data){updateRateState ->
+                                        when(updateRateState){
+                                            is UIState.Success -> {_stateRate.postValue(insertRateState)}
+                                            is UIState.Failure -> {_stateRate.postValue(insertRateState)}
+                                        }
+                                    }
+                                }
+                                is UIState.Failure -> {_stateRate.postValue(insertRateState)}
+                            }
+                        }
+                    }
+                    is UIState.Failure -> {_stateRate.postValue(insertRateState)}
+                }
+            }
+        }
+    }
+
 }
