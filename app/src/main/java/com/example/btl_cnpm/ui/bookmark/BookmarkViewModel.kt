@@ -1,12 +1,11 @@
 package com.example.btl_cnpm.ui.bookmark
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.btl_cnpm.data.local.BookmarkLocal
 import com.example.btl_cnpm.data.local.BookmarkLocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,27 +13,17 @@ import javax.inject.Inject
 class BookmarkViewModel @Inject constructor(private val repository: BookmarkLocalRepository) :
     ViewModel() {
 
-    private lateinit var listItemBookmark: LiveData<List<BookmarkLocal>>
-
-    fun getAllItemBookmark(id: String): LiveData<List<BookmarkLocal>> {
-        viewModelScope.launch {
-            val def = async {
-                return@async repository.getAllItemBookmark(id)
-            }
-            listItemBookmark = def.await()
-        }
-        return listItemBookmark
-    }
+    fun getAllItemBookmark(id: String) = repository.getAllItemBookmark(id)
 
     fun insertBookmark(itemBookmarkLocal: BookmarkLocal) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insertItem(itemBookmarkLocal)
         }
     }
 
-    fun deleteItemBookmark(id: Int) {
-        viewModelScope.launch {
-            repository.deleteItem(id)
+    fun deleteItemBookmark(bookmarkLocal: BookmarkLocal) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteItem(bookmarkLocal)
         }
     }
 }

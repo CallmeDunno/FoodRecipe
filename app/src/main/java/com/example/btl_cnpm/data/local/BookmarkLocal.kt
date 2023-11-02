@@ -10,6 +10,8 @@ data class BookmarkLocal(
     val id: Int?,
     @ColumnInfo(name = "IdRecipe")
     val idRecipe: String,
+    @ColumnInfo(name = "IdUser")
+    val idUser: String,
     @ColumnInfo(name = "NameRecipe")
     val name: String,
     @ColumnInfo(name = "Creator")

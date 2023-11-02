@@ -2,12 +2,7 @@ package com.example.btl_cnpm.di
 
 import com.example.btl_cnpm.data.local.BookmarkLocalDao
 import com.example.btl_cnpm.data.local.BookmarkLocalRepository
-import com.example.btl_cnpm.data.repository.HomeRepository
-import com.example.btl_cnpm.data.repository.LoginRepository
-import com.example.btl_cnpm.data.repository.NewRecipeRepository
-import com.example.btl_cnpm.data.repository.ProfileRepository
-import com.example.btl_cnpm.data.repository.SearchRepository
-import com.example.btl_cnpm.data.repository.RecipeRepository
+import com.example.btl_cnpm.data.repository.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -57,5 +52,5 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRecipeRepository(fFireStore: FirebaseFirestore) = RecipeRepository(fFireStore)
+    fun provideRecipeRepository(fFireStore: FirebaseFirestore, bookmarkDao: BookmarkLocalDao) = RecipeRepository(fFireStore, bookmarkDao)
 }
