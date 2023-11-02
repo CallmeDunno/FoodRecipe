@@ -21,13 +21,28 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_bookmark
 
     private val viewModel by viewModels<BookmarkViewModel>()
+    private lateinit var idUser: String
+    private lateinit var listBookmark: List<BookmarkLocal>
 
-    @Inject lateinit var sharedPre: SharedPreferencesManager
+    @Inject
+    lateinit var sharedPre: SharedPreferencesManager
 
     private val adapter by lazy {
         BookmarkAdapter {
-            findNavController().navigate(BookmarkFragmentDirections.actionBookmarkFragmentToRecipeFragment(it))
+            findNavController().navigate(
+                BookmarkFragmentDirections.actionBookmarkFragmentToRecipeFragment(
+                    it
+                )
+            )
         }
+    }
+
+    override fun initVariable() {
+        super.initVariable()
+        listBookmark = ArrayList()
+        idUser = if (!sharedPre.getString("idUserTemp").isNullOrEmpty())
+            sharedPre.getString("idUserTemp")!!
+        else sharedPre.getString("idUserRemember")!!
     }
 
     override fun initView() {
@@ -40,8 +55,12 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
             }
             rcvBookmark.adapter = adapter
 
-            viewModel.getAllItemBookmark(getIdUser()).observe(viewLifecycleOwner) {
-                if (it.isEmpty()) tvNullItem.show() else tvNullItem.hide()
+            viewModel.getAllItemBookmark(idUser).observe(viewLifecycleOwner) {
+                if (it.isEmpty()) tvNullItem.show()
+                else {
+                    listBookmark = it
+                    tvNullItem.hide()
+                }
                 adapter.submitList(it)
             }
         }
@@ -62,41 +81,22 @@ class BookmarkFragment : BaseFragment<FoodRecipeFragmentBookmarkBinding>() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                //TODO("Check this if it have bug")
                 val position = viewHolder.layoutPosition
-                val list: ArrayList<BookmarkLocal> =
-                    adapter.currentList as ArrayList<BookmarkLocal>
-                val deletedBookmark = adapter.currentList[position]
-                if (deletedBookmark != null) {
-                    viewModel.deleteItemBookmark(deletedBookmark.id!!)
-                    list.remove(deletedBookmark)
-                    adapter.submitList(list)
-                    adapter.notifyItemRemoved(position)
-                }
+                val deletedBookmark = listBookmark[position]
+                viewModel.deleteItemBookmark(deletedBookmark)
                 Snackbar.make(
                     binding.rcvBookmark,
-                    "Deleted " + deletedBookmark.name,
+                    "Delete ${deletedBookmark.name} successful!",
                     Snackbar.LENGTH_LONG
                 )
                     .setAction(
                         "Undo"
                     ) {
-                        if (deletedBookmark != null) {
-                            viewModel.insertBookmark(deletedBookmark)
-                            list.add(deletedBookmark)
-                            adapter.submitList(list)
-                            adapter.notifyItemInserted(position)
-                        }
+                        viewModel.insertBookmark(deletedBookmark)
                     }.show()
             }
 
         }).attachToRecyclerView(binding.rcvBookmark)
-    }
-
-    private fun getIdUser(): String {
-        val idRemember = sharedPre.getString("idUserRemember")
-        val idTemp = sharedPre.getString("idUserTemp")
-        return if (idRemember.isNullOrEmpty()) idTemp!! else idRemember
     }
 
 }

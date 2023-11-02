@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="com.example.btl_cnpm.model.Recipe" />
@@ -138,6 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_2sdp"
                         android:fontFamily="@font/poppins_medium"
+                        android:text="@{item.rate + ``}"
                         android:gravity="center"
                         android:textAlignment="center"
                         android:textColor="@color/black"

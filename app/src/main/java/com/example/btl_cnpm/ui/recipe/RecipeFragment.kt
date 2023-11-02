@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -16,11 +18,14 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
+import com.example.btl_cnpm.data.local.BookmarkLocal
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentRecipeBinding
 import com.example.btl_cnpm.model.Procedure
 import com.example.btl_cnpm.ui.recipe.adapter.ProcedureRecipeAdapter
 import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.UIState
+import com.example.btl_cnpm.utils.extensions.show
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -32,9 +37,18 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
     private val adapter by lazy { ProcedureRecipeAdapter() }
     private val viewModel by viewModels<RecipeViewModel>()
     private val argument: RecipeFragmentArgs by navArgs()
+    private lateinit var idRecipe: String
+    private lateinit var idUser: String
 
-    @Inject
-    lateinit var sharedPre: SharedPreferencesManager
+    @Inject lateinit var sharedPre: SharedPreferencesManager
+
+    override fun initVariable() {
+        super.initVariable()
+        idRecipe = argument.idRecipe
+        idUser = if (!sharedPre.getString("idUserTemp").isNullOrEmpty())
+            sharedPre.getString("idUserTemp")!!
+        else sharedPre.getString("idUserRemember")!!
+    }
 
     override fun initView() {
         super.initView()
@@ -44,7 +58,7 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
             rcvProcedureRecipe.adapter = adapter
         }
         with(viewModel) {
-            getRecipe(argument.idRecipe).observe(viewLifecycleOwner) {
+            getRecipe(idRecipe).observe(viewLifecycleOwner) {
                 when (it) {
                     is UIState.Success -> {
                         binding.item = it.data
@@ -82,12 +96,14 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
                     }
                 }
             }
-            stateRate.observe(viewLifecycleOwner){
-                when(it){
+            stateRate.observe(viewLifecycleOwner) {
+                when (it) {
                     is UIState.Success -> {
                         notify(it.data)
                     }
-                    is UIState.Failure -> {notify(it.message.toString())}
+                    is UIState.Failure -> {
+                        notify(it.message.toString())
+                    }
                 }
             }
         }
@@ -109,13 +125,28 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
                                 showRatingDialog()
                             }
                             R.id.saveItemMore -> {
-                                notify("Save")
+                                val recipe = binding.item!!
+                                val idRecipe = recipe.id
+                                val name = recipe.name
+                                val creator = tvAuthorNameRecipe.text.toString()
+                                val timer = recipe.timer
+                                val rate = recipe.rate
+                                val ingredient = recipe.ingredient
+                                val image = recipe.image
+                                val lProcedure = adapter.currentList
+                                val procedure = Gson().toJson(lProcedure)
+                                val bookmarkLocal = BookmarkLocal(null, idRecipe, idUser, name, creator, timer, rate, ingredient, image, procedure)
+                                notify("Saved to bookmark successful!")
+                                viewModel.saveToBookmark(bookmarkLocal)
                             }
                         }
                         true
                     }
                     popUp.show()
                 }
+            }
+            btnFollowRecipe.setOnClickListener {
+
             }
         }
     }
@@ -132,17 +163,41 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
             WindowManager.LayoutParams.WRAP_CONTENT
         )
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         val ratingBar = dialog.findViewById<RatingBar>(R.id.ratingBar)
-        dialog.findViewById<Button>(R.id.btnSendRatingBar).setOnClickListener {
-            val idUser = if (!sharedPre.getString("idUserTemp").isNullOrEmpty())
-                sharedPre.getString("idUserTemp")!!
-            else sharedPre.getString("idUserRemember")!!
+        val buttonSend = dialog.findViewById<Button>(R.id.btnSendRatingBar)
+
+        buttonSend.visibility = View.INVISIBLE
+        viewModel.checkExistsRateByUser(idRecipe, idUser)
+            .observe(viewLifecycleOwner) { isExist ->
+                when (isExist) {
+                    is UIState.Success -> {
+                        val (rate, idRate) = isExist.data
+                        ratingBar.rating = rate.toFloat()
+                        buttonSend.tag = rate
+                        ratingBar.tag = idRate
+                        buttonSend.show()
+                    }
+                    is UIState.Failure -> { Log.e("Dunno", isExist.message.toString()) }
+                }
+            }
+        buttonSend.setOnClickListener {
             val rate = ratingBar.rating.toInt()
-            viewModel.updateRate(argument.idRecipe, idUser, rate)
+            val idRate = ratingBar.tag.toString()
+            if (buttonSend.tag.toString().toInt() > 0) {
+                viewModel.updateRate(idRecipe, idRate, rate)
+            } else {
+                viewModel.insertRate(idRecipe, idUser, rate)
+            }
+            viewModel.stateRate.observe(viewLifecycleOwner) {
+                when (it) {
+                    is UIState.Success -> { notify(it.data) }
+                    is UIState.Failure -> { notify(it.message.toString()) }
+                }
+            }
             dialog.dismiss()
         }
         dialog.show()
     }
-
 
 }

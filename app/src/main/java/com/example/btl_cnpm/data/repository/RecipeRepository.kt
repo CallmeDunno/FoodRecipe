@@ -1,5 +1,7 @@
 package com.example.btl_cnpm.data.repository
 
+import com.example.btl_cnpm.data.local.BookmarkLocal
+import com.example.btl_cnpm.data.local.BookmarkLocalDao
 import com.example.btl_cnpm.model.Procedure
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
@@ -9,9 +11,9 @@ import com.google.firebase.firestore.toObject
 import java.math.RoundingMode
 import javax.inject.Inject
 
-class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFirestore) {
+class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFirestore, private val dao: BookmarkLocalDao) {
 
-    suspend fun getRecipe(id: String, result: (UIState<Recipe>) -> Unit) {
+    fun getRecipe(id: String, result: (UIState<Recipe>) -> Unit) {
         fFireStore.collection("Recipe")
             .document(id)
             .get()
@@ -41,7 +43,7 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
 
-    suspend fun getUser(id: String, result: (UIState<User>) -> Unit) {
+    fun getUser(id: String, result: (UIState<User>) -> Unit) {
         fFireStore.collection("User").whereEqualTo("id", id).limit(1).get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -61,7 +63,7 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
 
-    suspend fun getProcedure(id: String, result: (UIState<List<Procedure>>) -> Unit) {
+    fun getProcedure(id: String, result: (UIState<List<Procedure>>) -> Unit) {
         fFireStore.collection("Recipe").document(id).collection("Procedure").get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -78,19 +80,39 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
 
-    suspend fun insertRate(
+    fun insertRate(
         idRecipe: String,
         idUser: String,
         rating: Int,
         result: (UIState<String>) -> Unit
     ) {
-        val itemRate = hashMapOf("idRecipe" to idRecipe, "idUser" to idUser, "rating" to rating)
+        val itemRate = hashMapOf(
+            "idRecipe" to idRecipe,
+            "idUser" to idUser,
+            "rating" to rating
+        )
         fFireStore
             .collection("Rate")
             .document().set(itemRate)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) result.invoke(UIState.Success("Rating Successful"))
                 else result.invoke(UIState.Failure("Rating Failure"))
+            }
+            .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
+    }
+
+    fun updateRate(
+        idRate: String,
+        rating: Int,
+        result: (UIState<String>) -> Unit
+    ) {
+        fFireStore
+            .collection("Rate")
+            .document(idRate)
+            .update("rating", rating)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) result.invoke(UIState.Success("Update Rating Successful"))
+                else result.invoke(UIState.Failure("Update Rating Failure"))
             }
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
@@ -126,5 +148,29 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
                 else result.invoke(UIState.Failure("Update Rate In Recipe Failure"))
             }
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
+    }
+
+    fun checkExistsRateByUser(idRecipe: String, idUser: String, result: (UIState<Pair<Int, String>>) -> Unit) {
+        fFireStore.collection("Rate")
+            .whereEqualTo("idUser", idUser)
+            .whereEqualTo("idRecipe", idRecipe)
+            .limit(1)
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    if (it.result.size() > 0) {
+                        val rate = it.result.documents[0].data?.get("rating").toString().toInt()
+                        result.invoke(UIState.Success(Pair(rate, it.result.documents[0].id)))
+                    } else result.invoke(UIState.Success(Pair(0, "")))
+                } else result.invoke(UIState.Failure(it.exception.toString()))
+            }
+            .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
+    }
+
+    fun insertItemToLocal(bookmarkLocal: BookmarkLocal) = dao.insertItemBookmark(bookmarkLocal)
+
+    fun isExistsItem(idRecipe: String, idUser: String): Int {
+        val x = dao.isExistsItem(idRecipe, idUser)
+        return x.size
     }
 }
