@@ -33,6 +33,10 @@ class ProfileRecipeAdapter(val onItemClick: (String) -> Unit): ListAdapter<Map.E
             binding.txtRecipeName.text = recipe.key.name
             binding.txtRecipeMinute.text = "${recipe.key.timer} mins"
             binding.txtCreatorName.text = "By ${recipe.value.username}"
+            binding.txtRecipeRate.text = recipe.key.rate.toString()
+            itemView.setOnClickListener {
+                onItemClick.invoke(recipe.key.id)
+            }
         }
     }
 

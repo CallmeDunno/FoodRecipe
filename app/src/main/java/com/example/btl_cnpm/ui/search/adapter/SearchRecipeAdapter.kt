@@ -34,6 +34,7 @@ class SearchRecipeAdapter(val onItemClick: (String) -> Unit): ListAdapter<Map.En
             Glide.with(binding.root.context).load(recipe.key.image).into(binding.imgRecipe)
             binding.txtRecipeName.text = recipe.key.name
             binding.txtCreatorName.text = "By ${recipe.value.username}"
+            binding.txtRecipeRate.text = recipe.key.rate.toString()
             itemView.setOnClickListener {
                 onItemClick.invoke(recipe.key.id)
             }

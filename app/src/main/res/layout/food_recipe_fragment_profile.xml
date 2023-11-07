@@ -28,6 +28,7 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:background="@drawable/bg_oval_orange"
+                android:backgroundTint="@color/veronese_green"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
@@ -57,37 +58,41 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
                     android:maxLines="1"
-                    android:text="Chef"
+                    android:text="Recipe: "
                     android:textColor="@color/gray"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Biography"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txt_profile_bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:maxLines="2"
+                    android:textColor="@color/veronese_green"
                     android:textSize="@dimen/_11ssp" />
             </LinearLayout>
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/txt_profile_bio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:ellipsize="end"
-            android:fontFamily="@font/poppins_medium"
-            android:maxLines="3"
-            android:enabled="false"
-            android:hint="Thêm tiểu sử"
-            android:textColor="@color/veronese_green"
-            android:textSize="@dimen/_11ssp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_text_input"
-                android:backgroundTint="@color/veronese_green"
+                android:backgroundTint="@color/gray"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/recipe"
                 android:textColor="@color/white"
