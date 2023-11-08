@@ -143,9 +143,6 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
                     popUp.show()
                 }
             }
-            btnFollowRecipe.setOnClickListener {
-
-            }
         }
     }
 
