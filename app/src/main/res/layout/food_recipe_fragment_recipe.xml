@@ -151,141 +151,141 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvNameRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginVertical="@dimen/_8sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@{item.name}"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/layoutImageRecipe" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutAuthor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintTop_toBottomOf="@id/tvNameRecipe">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgAvatarAuthorRecipe"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:scaleType="centerCrop"
-                android:src="@color/transparent"
-                app:civ_circle_background_color="@color/black_600"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnFollowRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_green_corner_10"
-                android:fontFamily="@font/poppins_medium"
-                android:minHeight="0dp"
-                android:paddingHorizontal="@dimen/_8sdp"
-                android:paddingVertical="@dimen/_10sdp"
-                android:text="Follow"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/imgAvatarAuthorRecipe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/imgAvatarAuthorRecipe" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/_5sdp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@id/imgAvatarAuthorRecipe"
-                app:layout_constraintEnd_toStartOf="@id/btnFollowRecipe"
-                app:layout_constraintStart_toEndOf="@id/imgAvatarAuthorRecipe"
-                app:layout_constraintTop_toTopOf="@id/imgAvatarAuthorRecipe">
-
-                <TextView
-                    android:id="@+id/tvAuthorNameRecipe"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/poppins_medium"
-                    android:maxLines="2"
-                    android:text="@string/app_name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/poppins_medium"
-                    android:maxLines="1"
-                    android:text="Chef"
-                    android:textSize="@dimen/_12ssp" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tvTitleIngredientRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Ingredient"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toBottomOf="@id/layoutAuthor" />
-
-        <TextView
-            android:id="@+id/tvIngredientRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:maxLines="4"
-            android:paddingVertical="@dimen/_3sdp"
-            android:scrollbarSize="@dimen/_1sdp"
-            android:scrollbars="vertical"
-            android:text="@{item.ingredient}"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleIngredientRecipe" />
-
-        <TextView
-            android:id="@+id/tvTitleProcedureRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginVertical="@dimen/_5sdp"
-            android:drawableStart="@drawable/ic_cook"
-            android:drawablePadding="@dimen/_5sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Procedure"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toBottomOf="@id/tvIngredientRecipe" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvProcedureRecipe"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_3sdp"
             android:overScrollMode="never"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleProcedureRecipe"
-            tools:listitem="@layout/food_recipe_item_step" />
+            app:layout_constraintTop_toBottomOf="@id/layoutImageRecipe"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvNameRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@{item.name}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameRecipe">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgAvatarAuthorRecipe"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@color/transparent"
+                        app:civ_circle_background_color="@color/black_600"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginHorizontal="@dimen/_5sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@id/imgAvatarAuthorRecipe"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imgAvatarAuthorRecipe"
+                        app:layout_constraintTop_toTopOf="@id/imgAvatarAuthorRecipe">
+
+                        <TextView
+                            android:id="@+id/tvAuthorNameRecipe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:maxLines="2"
+                            android:text="@string/app_name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:maxLines="1"
+                            android:text="Chef"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvTitleIngredientRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Ingredient"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutAuthor" />
+
+                <TextView
+                    android:id="@+id/tvIngredientRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingVertical="@dimen/_3sdp"
+                    android:text="@{item.ingredient}"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleIngredientRecipe" />
+
+                <TextView
+                    android:id="@+id/tvTitleProcedureRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:drawableStart="@drawable/ic_cook"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Procedure"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintTop_toBottomOf="@id/tvIngredientRecipe" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvProcedureRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleProcedureRecipe"
+                    tools:listitem="@layout/food_recipe_item_step" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

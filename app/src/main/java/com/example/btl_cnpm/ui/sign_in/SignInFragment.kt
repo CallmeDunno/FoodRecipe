@@ -8,6 +8,7 @@ import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentSigninBinding
 import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.UIState
+import com.example.btl_cnpm.utils.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +28,11 @@ class SignInFragment : BaseFragment<FoodRecipeFragmentSigninBinding>() {
     override fun initAction() {
         super.initAction()
         binding.apply {
+            layoutSinIn.setOnClickListener {
+                it.hideKeyboard()
+                edtEmailSignIn.clearFocus()
+                edtPasswordSignIn.clearFocus()
+            }
             tvSignUp.setOnClickListener {
                 requireView().findNavController().popBackStack(R.id.signInFragment, true)
                 requireView().findNavController().navigate(R.id.signUpFragment)

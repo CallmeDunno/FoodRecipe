@@ -93,7 +93,7 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
         )
         fFireStore
             .collection("Rate")
-            .document().set(itemRate)
+            .add(itemRate)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) result.invoke(UIState.Success("Rating Successful"))
                 else result.invoke(UIState.Failure("Rating Failure"))

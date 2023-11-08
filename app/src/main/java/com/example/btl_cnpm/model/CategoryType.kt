@@ -1,6 +1,6 @@
 package com.example.btl_cnpm.model
 
-class Category {
+class CategoryType {
     private var _id: String?= ""
     var id
         get() = _id ?: ""

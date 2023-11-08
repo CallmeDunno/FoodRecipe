@@ -10,6 +10,7 @@ import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentForgotPasswordBinding
 import com.example.btl_cnpm.utils.extensions.hide
+import com.example.btl_cnpm.utils.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +29,10 @@ class ForgotPasswordFragment : BaseFragment<FoodRecipeFragmentForgotPasswordBind
     override fun initAction() {
         super.initAction()
         binding.apply {
+            layoutForgotPassword.setOnClickListener {
+                it.hideKeyboard()
+                edtemailForgotpassword.clearFocus()
+            }
             headerForgotPassword.btnBackHeader.setOnClickListener {
                 requireView().findNavController().popBackStack()
             }

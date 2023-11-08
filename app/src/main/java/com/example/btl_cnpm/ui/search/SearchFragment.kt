@@ -2,7 +2,6 @@ package com.example.btl_cnpm.ui.search
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentSearchBinding
-import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
