@@ -6,24 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.btl_cnpm.databinding.FoodRecipeLayoutItemCategoryBinding
-import com.example.btl_cnpm.model.Category
+import com.example.btl_cnpm.model.CategoryType
 
-class CategoryAdapter(val onItemClick: (String) -> Unit) : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(object: DiffUtil.ItemCallback<Category>() {
-    override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
+class CategoryAdapter(val onItemClick: (String) -> Unit) : ListAdapter<CategoryType, CategoryAdapter.CategoryViewHolder>(object: DiffUtil.ItemCallback<CategoryType>() {
+    override fun areItemsTheSame(oldItem: CategoryType, newItem: CategoryType): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
+    override fun areContentsTheSame(oldItem: CategoryType, newItem: CategoryType): Boolean {
         return oldItem.id == newItem.id
     }
 
 
 }) {
     inner class CategoryViewHolder(private val binding: FoodRecipeLayoutItemCategoryBinding): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(category: Category) {
-            binding.txtRecipeCategory.text = category.name
+        fun onBind(categoryType: CategoryType) {
+            binding.txtRecipeCategory.text = categoryType.name
             itemView.setOnClickListener {
-                onItemClick.invoke(category.id)
+                onItemClick.invoke(categoryType.id)
             }
         }
 
