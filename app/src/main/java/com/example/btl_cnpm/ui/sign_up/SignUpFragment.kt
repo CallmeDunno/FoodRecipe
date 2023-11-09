@@ -9,6 +9,7 @@ import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentSignupBinding
 import com.example.btl_cnpm.utils.UIState
+import com.example.btl_cnpm.utils.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,13 @@ class SignUpFragment : BaseFragment<FoodRecipeFragmentSignupBinding>() {
     override fun initAction() {
         super.initAction()
         binding.apply {
+            layoutSignUp.setOnClickListener {
+                it.hideKeyboard()
+                edtPassword.clearFocus()
+                edtUsername.clearFocus()
+                edtEmail.clearFocus()
+                edtConfirmPassword.clearFocus()
+            }
             btnSignUp.setOnClickListener {
                 val username = edtUsername.text.toString().trim()
                 val password = edtPassword.text.toString().trim()

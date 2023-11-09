@@ -3,7 +3,6 @@ package com.example.btl_cnpm.ui.recipe
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -53,14 +52,13 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
     override fun initView() {
         super.initView()
         binding.apply {
-            headerRecipe.tvHeader.text = "Recipe"
-            tvIngredientRecipe.movementMethod = ScrollingMovementMethod()
             rcvProcedureRecipe.adapter = adapter
         }
         with(viewModel) {
             getRecipe(idRecipe).observe(viewLifecycleOwner) {
                 when (it) {
                     is UIState.Success -> {
+                        binding.headerRecipe.tvHeader.text = "${it.data.name}"
                         binding.item = it.data
                         val idUser = it.data.idUser
                         val idRecipe = it.data.id
@@ -144,9 +142,6 @@ class RecipeFragment : BaseFragment<FoodRecipeFragmentRecipeBinding>() {
                     }
                     popUp.show()
                 }
-            }
-            btnFollowRecipe.setOnClickListener {
-
             }
         }
     }

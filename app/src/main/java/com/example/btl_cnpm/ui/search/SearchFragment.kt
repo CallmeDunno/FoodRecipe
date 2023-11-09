@@ -3,7 +3,6 @@ package com.example.btl_cnpm.ui.search
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
@@ -18,7 +17,6 @@ import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalDao
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalDatabase
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalRepository
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentSearchBinding
-import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.home.HomeFragmentDirections

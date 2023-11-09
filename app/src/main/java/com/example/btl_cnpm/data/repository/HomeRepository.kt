@@ -1,7 +1,7 @@
 package com.example.btl_cnpm.data.repository
 
 import android.util.Log
-import com.example.btl_cnpm.model.Category
+import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
@@ -15,28 +15,24 @@ import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 
-class HomeRepository @Inject constructor(
-    private val fAuth: FirebaseAuth,
-    private val fFireStore: FirebaseFirestore
-) {
-    private var listCategory = arrayListOf<Category>()
-
+class HomeRepository @Inject constructor(private val fAuth: FirebaseAuth, private val fFireStore: FirebaseFirestore) {
+    private var listCategoryType = arrayListOf<CategoryType>()
     private var listRecipe = arrayListOf<Recipe>()
     private var listUser2 = arrayListOf<User>()
     private var listUser = arrayListOf<User>()
 
-    fun getCategoryList(result: (UIState<ArrayList<Category>>) -> Unit) {
-        listCategory.clear()
+    fun getCategoryList(result: (UIState<ArrayList<CategoryType>>)-> Unit) {
+        listCategoryType.clear()
         fFireStore.collection("CategoryType")
             .get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     for (document in it.result) {
                         val id = document.id
-                        val name = document.toObject(Category::class.java).name
-                        listCategory.add(Category(id, name))
+                        val name = document.toObject(CategoryType::class.java).name
+                        listCategoryType.add(CategoryType(id, name))
                     }
-                    result.invoke(UIState.Success(listCategory))
+                    result.invoke(UIState.Success(listCategoryType))
                 } else {
                     result.invoke(UIState.Failure(it.exception?.message))
                 }

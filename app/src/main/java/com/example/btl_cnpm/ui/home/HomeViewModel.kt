@@ -1,12 +1,10 @@
 package com.example.btl_cnpm.ui.home
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.btl_cnpm.data.repository.HomeRepository
-import com.example.btl_cnpm.data.repository.LoginRepository
-import com.example.btl_cnpm.model.Category
+import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
@@ -17,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
-    fun getCategory(): MutableLiveData<UIState<ArrayList<Category>>> {
-        val mutableLiveData = MutableLiveData<UIState<ArrayList<Category>>>()
+    fun getCategory(): MutableLiveData<UIState<ArrayList<CategoryType>>> {
+        val mutableLiveData = MutableLiveData<UIState<ArrayList<CategoryType>>>()
         viewModelScope.launch(Dispatchers.IO) {
             repository.getCategoryList {
                 mutableLiveData.postValue(it)
