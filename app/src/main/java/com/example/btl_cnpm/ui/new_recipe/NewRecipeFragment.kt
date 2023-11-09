@@ -99,6 +99,7 @@ class NewRecipeFragment : BaseFragment<FoodRecipeFragmentNewRecipeBinding>() {
                             val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
                             val recipe = Recipe(name, idCategoryType, idUser, ingredient, date, it.data, timer, 0f)
                             viewModel.addNewRecipe(recipe, lProcedure)
+                            requireView().findNavController().popBackStack()
                         }
                     }
                     is UIState.Failure -> {
@@ -145,7 +146,6 @@ class NewRecipeFragment : BaseFragment<FoodRecipeFragmentNewRecipeBinding>() {
                 if (isValid(uriImage)){
                     viewModel.uploadImage(Uri.parse(uriImage))
                 }
-
             }
 
             btnAddProcedureNewRecipe.setOnClickListener {

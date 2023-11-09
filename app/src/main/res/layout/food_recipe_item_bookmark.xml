@@ -78,9 +78,9 @@
                     android:text="@{item.timer + ` mins`}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
-                    app:layout_constraintBottom_toBottomOf="@id/imgBookmarkRecipe"
-                    app:layout_constraintEnd_toStartOf="@id/imgBookmarkRecipe"
-                    app:layout_constraintTop_toTopOf="@id/imgBookmarkRecipe" />
+                    app:layout_constraintBottom_toBottomOf="@id/imgTimerRecipe"
+                    app:layout_constraintEnd_toStartOf="@id/imgTimerRecipe"
+                    app:layout_constraintTop_toTopOf="@id/imgTimerRecipe" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

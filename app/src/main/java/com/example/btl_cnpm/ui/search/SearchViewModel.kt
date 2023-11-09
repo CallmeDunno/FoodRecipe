@@ -3,13 +3,10 @@ package com.example.btl_cnpm.ui.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.btl_cnpm.data.local.BookmarkLocal
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocal
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalRepository
 import com.example.btl_cnpm.data.repository.HomeRepository
-import com.example.btl_cnpm.data.repository.LoginRepository
 
-import com.example.btl_cnpm.data.repository.SearchRepository
 import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
@@ -24,7 +21,7 @@ class SearchViewModel @Inject constructor(private val repository: HomeRepository
     fun getCategory(): MutableLiveData<UIState<ArrayList<CategoryType>>> {
         val mutableLiveData = MutableLiveData<UIState<ArrayList<CategoryType>>>()
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCategoryList {
+            repository.getCategoryTypeList {
                 mutableLiveData.postValue(it)
             }
         }
