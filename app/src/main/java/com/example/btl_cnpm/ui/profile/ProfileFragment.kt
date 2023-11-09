@@ -1,6 +1,16 @@
 package com.example.btl_cnpm.ui.profile
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -24,6 +34,7 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_profile
 
     private val profileViewModel by viewModels<ProfileViewModel>()
+    private var userId = ""
 
     @Inject
     lateinit var sharedPre: SharedPreferencesManager
@@ -36,8 +47,10 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
 
     override fun initView() {
         super.initView()
+        userId = ""
         binding.rvRecipe.adapter = profileRecipeAdapter
         binding.headerProfile.tvHeader.text = requireContext().getString(R.string.profile)
+        binding.headerProfile.btnBackHeader.visibility = View.GONE
     }
 
     override fun initAction() {
@@ -47,21 +60,25 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
                 requireView().findNavController().navigate(R.id.newRecipeFragment)
             }
 
-            binding.headerProfile.btnBackHeader.setOnClickListener {
-                popBackStack()
+            headerProfile.btnMoreHeader.setOnClickListener{
+                showDialogOption()
             }
-            sharedPre.getString("idUser")?.let {
-                profileViewModel.getUser(it).observe(requireActivity()) { result ->
+            sharedPre.getString("idUserRemember")?.let {
+                userId = it
+            }
+            sharedPre.getString("idUserTemp")?.let {
+                userId = it
+            }
+            if(userId.isNotEmpty()) {
+                profileViewModel.getUser(userId).observe(requireActivity()) { result ->
                     when (result) {
                         is UIState.Success -> {
                             txtProfileName.text = result.data.username
+                            txtProfileBio.text = result.data.bio
                             if(result.data.image.isNotEmpty()) {
                                 Glide.with(requireContext()).load(result.data.image).into(imgProfileAvatar)
                             }
-                            if(result.data.bio.isEmpty()) {
-                                txtProfileBio.hint = "Thêm tiểu sử"
-                            }
-                            profileViewModel.getMyRecipes(it)
+                            profileViewModel.getMyRecipes(userId)
                                 .observe(requireActivity()) { resultRecipe ->
                                     userRecipeMap.clear()
                                     when (resultRecipe) {
@@ -89,12 +106,39 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
                             Log.d("tung", "fail")
                         }
                     }
-
                 }
+            } else {
+                showDialogFail("Fail to get user")
             }
+        }
+    }
 
+    fun showDialogOption() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.food_recipe_dialog_edit_sign_out)
+        val window = dialog.window ?: return
+        val btnEdit = dialog.findViewById<AppCompatButton>(R.id.btn_edit)
+        val btnSignOut = dialog.findViewById<AppCompatButton>(R.id.btn_sign_out)
+
+        btnEdit.setOnClickListener {
+            requireView().findNavController().navigate(R.id.editProfileFragment2)
+            dialog.dismiss()
         }
 
-
+        btnSignOut.setOnClickListener {
+            sharedPre.removeKey("idUserTemp")
+            sharedPre.removeKey("idUserRemember")
+            dialog.dismiss()
+            requireView().findNavController().navigate(R.id.login_navigation)
+        }
+        window.setGravity(Gravity.CENTER)
+        window.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.show()
     }
 }

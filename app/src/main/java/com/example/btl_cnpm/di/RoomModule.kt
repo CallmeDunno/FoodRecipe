@@ -3,6 +3,7 @@ package com.example.btl_cnpm.di
 import android.content.Context
 import androidx.room.Room
 import com.example.btl_cnpm.data.local.BookmarkLocalDatabase
+import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,4 +29,18 @@ class RoomModule {
     @Provides
     fun provideBookmarkLocalDao(database: BookmarkLocalDatabase) = database.bookmarkLocalDao()
 
+
+    @Singleton
+    @Provides
+    fun provideRecipeLocalDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context.applicationContext,
+        RecipeLocalDatabase::class.java,
+        "RecipeLocal"
+    ).build()
+
+    @Singleton
+    @Provides
+    fun provideRecipeLocalDao(database: RecipeLocalDatabase) = database.recipeLocalDao()
 }

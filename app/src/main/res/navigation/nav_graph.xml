@@ -120,7 +120,7 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_homeFragment_to_recipeFragment"
-                app:destination="@id/recipeFragment" />
+                app:destination="@id/recipeFragment"/>
         </fragment>
         <fragment
             android:id="@+id/bookmarkFragment"
@@ -142,7 +142,10 @@
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            <action
+                android:id="@+id/action_searchFragment_to_bookmarkFragment"
+                app:destination="@id/bookmarkFragment" />
         </fragment>
         <fragment
             android:id="@+id/recipeFragment"
@@ -168,11 +171,22 @@
             <action
                 android:id="@+id/action_profileFragment_to_recipeFragment"
                 app:destination="@id/recipeFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_editProfileFragment2"
+                app:destination="@id/editProfileFragment2" />
         </fragment>
         <fragment
             android:id="@+id/newRecipeFragment"
             android:name="com.example.btl_cnpm.ui.new_recipe.NewRecipeFragment"
             android:label="NewRecipeFragment"
             tools:layout="@layout/food_recipe_fragment_new_recipe" />
+        <fragment
+            android:id="@+id/editProfileFragment2"
+            android:name="com.example.btl_cnpm.ui.edit_profile.EditProfileFragment"
+            android:label="EditProfileFragment" >
+            <action
+                android:id="@+id/action_editProfileFragment2_to_profileFragment"
+                app:destination="@id/profileFragment" />
+        </fragment>
     </navigation>
 </navigation>

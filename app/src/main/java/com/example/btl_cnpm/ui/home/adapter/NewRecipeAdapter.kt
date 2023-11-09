@@ -1,8 +1,12 @@
 package com.example.btl_cnpm.ui.home.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
+import kotlin.math.floor
 
 class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Map.Entry<Recipe, User>, NewRecipeAdapter.NewRecipeViewHolder>(object : DiffUtil.ItemCallback<Map.Entry<Recipe, User>>() {
     override fun areItemsTheSame(
@@ -39,7 +44,8 @@ class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Map.Entry
             Glide.with(context).load(recipe.key.image).into(binding.imgRecipe)
             binding.txtRecipeName.text = recipe.key.name
             binding.txtRecipeMinute.text = "${recipe.key.timer} mins"
-            binding.txtCreatorName.text = recipe.value.username
+            binding.txtCreatorName.text = "By ${recipe.value.username}"
+            binding.recipeRate.numStars = floor(recipe.key.rate).toInt()
             if(recipe.value.image.isNotEmpty()) {
                 Glide.with(context).load(recipe.value.image).into(binding.imgCreatorAvatar)
             }

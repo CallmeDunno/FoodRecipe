@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
     fun getUser(id: String): MutableLiveData<UIState<User>> {
         val mutableLiveData = MutableLiveData<UIState<User>>()
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getUser(id) {
                 mutableLiveData.postValue(it)
             }
@@ -45,10 +45,10 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         return mutableLiveData
     }
 
-    fun getRecipeUserList(): MutableLiveData<UIState<HashMap<Recipe, User>>> {
-        val mutableLiveData = MutableLiveData<UIState<HashMap<Recipe, User>>>()
-        viewModelScope.launch(Dispatchers.Default) {
-            repository.getRecipeUserList {
+    fun getUsers(): MutableLiveData<UIState<ArrayList<User>>> {
+        val mutableLiveData = MutableLiveData<UIState<ArrayList<User>>>()
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getUserList {
                 mutableLiveData.postValue(it)
             }
         }

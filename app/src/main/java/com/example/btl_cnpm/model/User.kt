@@ -1,5 +1,7 @@
 package com.example.btl_cnpm.model
 
+import com.google.firebase.firestore.PropertyName
+
 class User {
     private var _id: String? = ""
     var id
@@ -98,6 +100,17 @@ class User {
     ) {
         this._id = id
         this._username = username
+        this._image = image
+    }
+    constructor(
+        id: String,
+        username: String,
+        bio: String,
+        image: String,
+    ) {
+        this._id = id
+        this._username = username
+        this._bio = bio
         this._image = image
     }
 }
