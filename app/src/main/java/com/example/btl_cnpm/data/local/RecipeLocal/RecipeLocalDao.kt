@@ -8,8 +8,8 @@ import androidx.room.Query
 
 @Dao
 interface RecipeLocalDao {
-    @Query("SELECT * FROM RecipeLocal")
-    fun getAllRecipes() : LiveData<List<RecipeLocal>>
+    @Query("SELECT IdRecipe FROM RecipeLocal WHERE idUser = :idUser")
+    fun getAllRecipes(idUser: String): LiveData<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRecipe(recipeLocal: RecipeLocal)

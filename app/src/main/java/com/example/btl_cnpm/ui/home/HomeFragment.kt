@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentHomeBinding
+import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
@@ -36,9 +37,9 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
     private var recipeList = mutableListOf<Recipe>()
     private var newRecipeList = mutableListOf<Recipe>()
     private var userRecipeMap = hashMapOf<Recipe, User>()
-    private var user = User()
     private var userId = ""
     private var userList = arrayListOf<User>()
+    private var categoryList = arrayListOf<Category>()
 
     @Inject
     lateinit var sharedPre: SharedPreferencesManager
@@ -81,9 +82,7 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
         super.initView()
         binding.apply {
             userId = ""
-            rvRecipeCategory.adapter = categoryAdapter
-            rvRecipe.adapter = recipeAdapter
-            rvNewRecipes.adapter = newRecipeAdapter
+
             progress.visibility = View.VISIBLE
             progressNew.visibility = View.VISIBLE
         }
@@ -98,14 +97,19 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
             sharedPre.getString("idUserTemp")?.let {
                 userId = it
             }
+            rvRecipeCategory.adapter = categoryAdapter
+            rvRecipe.adapter = recipeAdapter
+            rvNewRecipes.adapter = newRecipeAdapter
+            userRecipeMap.clear()
+            userList.clear()
+            recipeList.clear()
             if (userId.isNotEmpty()) {
                 homeViewModel.getUser(userId).observe(requireActivity()) { result ->
                     when (result) {
                         is UIState.Success -> {
-                            user = result.data
-                            binding.txtIntro.text = "Hello ${user.username}"
-                            if (user.image.isNotEmpty()) {
-                                Glide.with(requireContext()).load(user.image)
+                            binding.txtIntro.text = "Hello ${result.data.username}"
+                            if (result.data.image.isNotEmpty()) {
+                                Glide.with(requireContext()).load(result.data.image)
                                     .into(imgAvatar)
                             }
                         }
@@ -123,7 +127,10 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
             homeViewModel.getCategory().observe(requireActivity()) {
                 when (it) {
                     is UIState.Success -> {
-                        categoryAdapter.submitList(it.data)
+                        categoryList.clear()
+                        categoryList.add(Category("T9b6E7ecYMt4Qyq3Pmn0", "All"))
+                        categoryList.addAll(it.data)
+                        categoryAdapter.submitList(categoryList)
                     }
 
                     is UIState.Failure -> {
@@ -136,18 +143,16 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
             homeViewModel.getRecipes().observe(requireActivity()) {
                 when (it) {
                     is UIState.Success -> {
-                        recipeList = it.data
-                        recipeAdapter.submitList(recipeList)
                         progress.visibility = View.GONE
+                        recipeList = it.data
+                        recipeAdapter.submitList(it.data)
                         homeViewModel.getUsers().observe(requireActivity()) { result ->
                             when (result) {
                                 is UIState.Success -> {
                                     userList = result.data
-                                    Log.d("tung", "get all data")
                                     runBlocking {
                                         launch {
                                             getUserList()
-                                            Log.d("tung", "get all")
                                             binding.progressNew.visibility = View.GONE
                                             newRecipeAdapter.submitList(userRecipeMap.entries.toList())
                                         }

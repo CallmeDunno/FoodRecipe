@@ -1,12 +1,15 @@
 package com.example.btl_cnpm.ui.search
 
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
@@ -18,10 +21,12 @@ import com.example.btl_cnpm.databinding.FoodRecipeFragmentSearchBinding
 import com.example.btl_cnpm.model.Category
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
+import com.example.btl_cnpm.ui.home.HomeFragmentDirections
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
 import com.example.btl_cnpm.ui.search.adapter.FilterAdapter
 import com.example.btl_cnpm.ui.search.adapter.SearchRecipeAdapter
 import com.example.btl_cnpm.utils.FoodEntity
+import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.UIState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +34,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import kotlin.math.floor
 
 @AndroidEntryPoint
@@ -41,10 +47,18 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     private var categoryList = arrayListOf<Category>()
     private var userList = arrayListOf<User>()
     private var recipeList = mutableListOf<Recipe>()
+    @Inject
+    lateinit var sharedPre: SharedPreferencesManager
+    private var userId = ""
     private val searchViewModel by viewModels<SearchViewModel>()
     private val searchRecipeAdapter by lazy {
         SearchRecipeAdapter(onItemClick = {
-
+            searchViewModel.insertRecipeLocal(RecipeLocal(idRecipe = it, idUser = userId))
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToRecipeFragment(
+                    it
+                )
+            )
         })
     }
     private val filterTimeAdapter by lazy {
@@ -69,11 +83,8 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
         super.initView()
         binding.apply {
             headerSearch.tvHeader.text = binding.root.context.getString(R.string.search)
-            headerSearch.btnBackHeader.setOnClickListener {
-                requireView().findNavController().popBackStack()
-            }
+            headerSearch.btnBackHeader.visibility = View.GONE
             headerSearch.btnMoreHeader.visibility = View.GONE
-            rvSearchRecipe.adapter = searchRecipeAdapter
             txtResult.visibility = View.GONE
         }
     }
@@ -84,7 +95,15 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
             arguments?.let {
                 edtSearch.setText(it.getString("edtSearch"))
             }
-
+            sharedPre.getString("idUserRemember")?.let {
+                userId = it
+            }
+            sharedPre.getString("idUserTemp")?.let {
+                userId = it
+            }
+            rvSearchRecipe.adapter = searchRecipeAdapter
+            recipeList.clear()
+            userRecipeMap.clear()
             searchViewModel.getRecipes().observe(requireActivity()) {
                 when (it) {
                     is UIState.Success -> {
@@ -96,8 +115,19 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
                                     runBlocking {
                                         launch {
                                             getUserList()
-                                            if (edtSearch.text.isNullOrEmpty()) {
-                                                searchRecipeAdapter.submitList(userRecipeMap.entries.toList())
+                                            val search = edtSearch.text
+                                            if (search.isNullOrEmpty()) {
+                                                searchViewModel.getSearchedRecipes(userId).observe(requireActivity()) {list ->
+                                                    searchRecipeAdapter.submitList(
+                                                        userRecipeMap.entries.filter { entry ->
+                                                            list.contains(entry.key.id)
+                                                        }.reversed()
+                                                    )
+                                                }
+                                            } else {
+                                                searchRecipeAdapter.submitList(userRecipeMap.entries.filter {entry->
+                                                    entry.key.name.contains(search, true)
+                                                })
                                             }
                                         }
                                     }
@@ -153,6 +183,13 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
+                    p0?.let {
+                        searchRecipeAdapter.submitList(
+                            userRecipeMap.entries.filter { entry ->
+                                entry.key.name.contains(it, true)
+                            }
+                        )
+                    }
                 }
             }
             )
@@ -223,26 +260,30 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     }
 
     fun filter(onComplete: (HashMap<Recipe, User>) -> Unit) {
-        val filterMap = hashMapOf<Recipe, User>()
+        var filterMap = hashMapOf<Recipe, User>()
         if (filterRate != 0) {
             userRecipeMap.filter { entry ->
                 floor(entry.key.rate).toInt() == filterRate
             }.forEach { entry ->
                 filterMap[entry.key] = entry.value
             }
+        } else {
+            filterMap = userRecipeMap
         }
-        if (filterTime != 0) {
-            if (filterRate == FoodEntity.NEWEST) {
-
+        when(filterTime) {
+            FoodEntity.NEWEST -> {
+                filterMap.toSortedMap(compareByDescending{it.date})
+            }
+            FoodEntity.OLDEST -> {
+                filterMap.toSortedMap(compareByDescending{it.date})
             }
         }
+
         filterCategory?.let {
             if (it.isNotEmpty()) {
-                if (it != "T9b6E7ecYMt4Qyq3Pmn0") {
                     onComplete.invoke(filterMap.filter { entry ->
                         entry.key.idCategoryType == filterCategory
                     } as HashMap<Recipe, User>)
-                }
             } else {
                 onComplete.invoke(filterMap)
             }

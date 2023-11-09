@@ -42,9 +42,9 @@ class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Map.Entry
         fun onBind(recipe: Map.Entry<Recipe, User>) {
             val context = binding.root.context
             Glide.with(context).load(recipe.key.image).into(binding.imgRecipe)
-            binding.txtRecipeName.text = "By ${recipe.key.name}"
+            binding.txtRecipeName.text = recipe.key.name
             binding.txtRecipeMinute.text = "${recipe.key.timer} mins"
-            binding.txtCreatorName.text = recipe.value.username
+            binding.txtCreatorName.text = "By ${recipe.value.username}"
             binding.recipeRate.numStars = floor(recipe.key.rate).toInt()
             if(recipe.value.image.isNotEmpty()) {
                 Glide.with(context).load(recipe.value.image).into(binding.imgCreatorAvatar)
