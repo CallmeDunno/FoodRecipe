@@ -1,25 +1,19 @@
 package com.example.btl_cnpm.ui.search
 
-import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocal
-import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalDao
-import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalDatabase
-import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalRepository
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentSearchBinding
+import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
-import com.example.btl_cnpm.ui.home.HomeFragmentDirections
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
 import com.example.btl_cnpm.ui.search.adapter.FilterAdapter
 import com.example.btl_cnpm.ui.search.adapter.SearchRecipeAdapter
@@ -42,7 +36,7 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     private var filterRate: Int? = 0
     private var userRecipeMap = hashMapOf<Recipe, User>()
     private var filterCategory: String? = null
-    private var categoryList = arrayListOf<Category>()
+    private var categoryList = arrayListOf<CategoryType>()
     private var userList = arrayListOf<User>()
     private var recipeList = mutableListOf<Recipe>()
     @Inject

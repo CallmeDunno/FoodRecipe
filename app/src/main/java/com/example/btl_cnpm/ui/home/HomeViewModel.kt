@@ -15,10 +15,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
-    fun getCategory(): MutableLiveData<UIState<ArrayList<CategoryType>>> {
+    fun getCategoryType(): MutableLiveData<UIState<ArrayList<CategoryType>>> {
         val mutableLiveData = MutableLiveData<UIState<ArrayList<CategoryType>>>()
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCategoryList {
+            repository.getCategoryTypeList {
                 mutableLiveData.postValue(it)
             }
         }

@@ -1,17 +1,16 @@
 package com.example.btl_cnpm.ui.home
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentHomeBinding
-import com.example.btl_cnpm.model.Category
+import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
@@ -21,11 +20,9 @@ import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.UIState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-
 import javax.inject.Inject
 
 @SuppressLint("SuspiciousIndentation")
@@ -39,7 +36,7 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
     private var userRecipeMap = hashMapOf<Recipe, User>()
     private var userId = ""
     private var userList = arrayListOf<User>()
-    private var categoryList = arrayListOf<Category>()
+    private var categoryList = arrayListOf<CategoryType>()
 
     @Inject
     lateinit var sharedPre: SharedPreferencesManager
@@ -124,11 +121,11 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
             } else {
                 showDialogFail("Failed to get user")
             }
-            homeViewModel.getCategory().observe(requireActivity()) {
+            homeViewModel.getCategoryType().observe(requireActivity()) {
                 when (it) {
                     is UIState.Success -> {
                         categoryList.clear()
-                        categoryList.add(Category("T9b6E7ecYMt4Qyq3Pmn0", "All"))
+                        categoryList.add(CategoryType("T9b6E7ecYMt4Qyq3Pmn0", "All"))
                         categoryList.addAll(it.data)
                         categoryAdapter.submitList(categoryList)
                     }
