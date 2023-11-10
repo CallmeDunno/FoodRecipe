@@ -99,12 +99,17 @@ class NewRecipeFragment : BaseFragment<FoodRecipeFragmentNewRecipeBinding>() {
                             val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
                             val recipe = Recipe(name, idCategoryType, idUser, ingredient, date, it.data, timer, 0f)
                             viewModel.addNewRecipe(recipe, lProcedure)
-                            requireView().findNavController().popBackStack()
                         }
                     }
                     is UIState.Failure -> {
                         Log.e("Dunno", it.message.toString())
                     }
+                }
+            }
+            viewModel.stateCreateRecipe.observe(viewLifecycleOwner){
+                if (it){
+                    notify("Create new recipe successfully!")
+                    requireView().findNavController().popBackStack()
                 }
             }
         }
@@ -145,6 +150,7 @@ class NewRecipeFragment : BaseFragment<FoodRecipeFragmentNewRecipeBinding>() {
             btnAddNewRecipe.setOnClickListener {
                 if (isValid(uriImage)){
                     viewModel.uploadImage(Uri.parse(uriImage))
+                    notify("Please wait a moment........")
                 }
             }
 

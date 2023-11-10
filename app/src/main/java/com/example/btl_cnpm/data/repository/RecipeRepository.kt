@@ -8,8 +8,8 @@ import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
-import java.math.RoundingMode
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFirestore, private val dao: BookmarkLocalDao) {
 
@@ -117,7 +117,7 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
 
-    fun getAllRateById(idRecipe: String, result: (UIState<Float>) -> Unit) {
+    fun getAllRateById(idRecipe: String, result: (UIState<Double>) -> Unit) {
         fFireStore
             .collection("Rate")
             .whereEqualTo("idRecipe", idRecipe)
@@ -129,8 +129,9 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
                         for (r in it.result) {
                             sum += r.data["rating"].toString().toInt()
                         }
-                        val rate = (sum / it.result.size()).toFloat().toBigDecimal()
-                            .setScale(1, RoundingMode.HALF_EVEN).toFloat()
+//                        val rate = .toFloat().toBigDecimal()
+//                                .setScale(1, RoundingMode.HALF_EVEN).toFloat()
+                        val rate = ((sum / it.result.size()) * 10.0).roundToInt() / 10.0
                         result.invoke(UIState.Success(rate))
                     } else result.invoke(UIState.Failure("Not rate"))
                 }
@@ -138,7 +139,7 @@ class RecipeRepository @Inject constructor(private val fFireStore: FirebaseFires
             .addOnFailureListener { result.invoke(UIState.Failure(it.message.toString())) }
     }
 
-    fun updateRateInRecipe(idRecipe: String, rate: Float, result: (UIState<Boolean>) -> Unit) {
+    fun updateRateInRecipe(idRecipe: String, rate: Double, result: (UIState<Boolean>) -> Unit) {
         fFireStore
             .collection("Recipe")
             .document(idRecipe)
