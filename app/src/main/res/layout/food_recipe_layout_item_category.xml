@@ -11,7 +11,7 @@
         android:layout_margin="@dimen/_5sdp">
         <TextView
             android:id="@+id/txt_recipe_category"
-            android:layout_width="@dimen/_140sdp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/all"
             android:textSize="@dimen/_11ssp"
