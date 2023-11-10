@@ -76,13 +76,12 @@
                     app:layout_constraintEnd_toEndOf="parent">
 
                     <ImageView
-                        android:id="@+id/imgBookmarkRecipe"
+                        android:id="@+id/imgTimerRecipe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:background="@drawable/bg_circle_white"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_bookmark"
+                        android:src="@drawable/ic_timer"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -94,19 +93,9 @@
                         android:text="@{item.timer + ` mins`}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16ssp"
-                        app:layout_constraintBottom_toBottomOf="@id/imgBookmarkRecipe"
-                        app:layout_constraintEnd_toStartOf="@id/imgBookmarkRecipe"
-                        app:layout_constraintTop_toTopOf="@id/imgBookmarkRecipe" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_timer"
-                        app:layout_constraintBottom_toBottomOf="@id/tvMinutesRecipe"
-                        app:layout_constraintEnd_toStartOf="@id/tvMinutesRecipe"
-                        app:layout_constraintTop_toTopOf="@id/tvMinutesRecipe" />
-
+                        app:layout_constraintBottom_toBottomOf="@id/imgTimerRecipe"
+                        app:layout_constraintEnd_toStartOf="@id/imgTimerRecipe"
+                        app:layout_constraintTop_toTopOf="@id/imgTimerRecipe" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

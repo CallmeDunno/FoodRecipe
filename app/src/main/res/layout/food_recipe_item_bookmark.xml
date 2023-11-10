@@ -61,7 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
-                    android:id="@+id/imgTimerRecipe"
+                    android:id="@+id/imgTimerItemBookmark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -78,9 +78,9 @@
                     android:text="@{item.timer + ` mins`}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
-                    app:layout_constraintBottom_toBottomOf="@id/imgTimerRecipe"
-                    app:layout_constraintEnd_toStartOf="@id/imgTimerRecipe"
-                    app:layout_constraintTop_toTopOf="@id/imgTimerRecipe" />
+                    app:layout_constraintBottom_toBottomOf="@id/imgTimerItemBookmark"
+                    app:layout_constraintEnd_toStartOf="@id/imgTimerItemBookmark"
+                    app:layout_constraintTop_toTopOf="@id/imgTimerItemBookmark" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/mins_15"
                     android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/light_gray"
+                    android:textColor="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

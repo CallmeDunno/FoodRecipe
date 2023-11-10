@@ -21,6 +21,8 @@ class NewRecipeViewModel @Inject constructor(private val repository: NewRecipeRe
 
     private var _downloadUri = MutableLiveData<UIState<String>>()
     val downloadUri get() = _downloadUri
+    private var _stateCreateRecipe = MutableLiveData<Boolean>()
+    val stateCreateRecipe get() = _stateCreateRecipe
 
     fun uploadImage(uri: Uri) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -57,6 +59,7 @@ class NewRecipeViewModel @Inject constructor(private val repository: NewRecipeRe
 
     private fun addProcedure(idRecipe: String, lProcedure: List<Procedure>) {
         viewModelScope.launch(Dispatchers.IO) {
+            _stateCreateRecipe.postValue(false)
             for (p in lProcedure) {
                 launch {
                     repository.uploadProcedure(idRecipe, p) { addProcedureState ->
@@ -71,6 +74,7 @@ class NewRecipeViewModel @Inject constructor(private val repository: NewRecipeRe
                     }
                 }
             }
+            _stateCreateRecipe.postValue(true)
         }
     }
 }
