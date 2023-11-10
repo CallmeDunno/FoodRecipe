@@ -1,5 +1,47 @@
 <resources>
-    <string name="app_name">BTL_CNPM</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Food Recipe</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello">Hello User</string>
+    <string name="what_are_you_cooking_today">What are you cooking today?</string>
+    <string name="search_recipe">Search recipe</string>
+    <string name="new_recipes">New recipes</string>
+    <string name="recommend_recipe">Recommended recipes</string>
+    <string name="all">All</string>
+    <string name="classic_greek_salad">Classic Greek Salad</string>
+    <string name="time">Time</string>
+    <string name="mins_15">15 Mins</string>
+    <string name="recent_search">Recent search</string>
+    <string name="filter_search">Filter search</string>
+    <string name="newest">Newest</string>
+    <string name="oldest">Oldest</string>
+    <string name="popularity">Popularity</string>
+    <string name="rate">Rate</string>
+    <string name="category">Category</string>
+    <string name="filter">Filter</string>
+    <string name="profile">Profile</string>
+    <string name="recipe">Recipe</string>
+    <string name="name">Name</string>
+    <string name="re_enter_your_password">Re enter your password</string>
+    <string name="email_is_not_valid">Email is not valid!</string>
+    <string name="sign_up_fail">Sign up failed, please check your information</string>
+    <string name="sign_up_successfully">Sign up successfully</string>
+    <string name="fill_in_information">Please fill in information</string>
+    <string name="login_fail">Login failed, please check your login information</string>
+    <string name="mon_nuong">Món nướng</string>
+    <string name="mon_kho">Món kho</string>
+    <string name="mon_chien">Món chiên</string>
+    <string name="mon_xao">Món xào</string>
+    <string name="mon_canh">Món canh</string>
+    <string name="mon_lau">Món lâut</string>
+    <string name="mon_hap">Món hấp</string>
+    <string name="search">Search</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="by_unknown">By unknown</string>
+
+
 </resources>

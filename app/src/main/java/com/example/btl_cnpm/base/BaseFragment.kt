@@ -1,9 +1,12 @@
 package com.example.btl_cnpm.base
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -11,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.btl_cnpm.R
 
 abstract class BaseFragment<VB: ViewDataBinding> : Fragment() {
     protected lateinit var binding: VB
@@ -32,9 +36,12 @@ abstract class BaseFragment<VB: ViewDataBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initVariable()
         initView()
         initAction()
     }
+
+    open fun initVariable(){}
 
     open fun initView(){}
 
@@ -42,6 +49,27 @@ abstract class BaseFragment<VB: ViewDataBinding> : Fragment() {
 
     fun notify(msg: String){
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showDialogFail(message: String) {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.food_recipe_dialog_sign_in_failure)
+        val txtSignUpFail = dialog.findViewById<TextView>(R.id.tvContentError)
+        txtSignUpFail.text = message
+        dialog.setCanceledOnTouchOutside(false)
+        val window = dialog.window ?: return
+        window.setGravity(Gravity.CENTER)
+        window.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.findViewById<Button>(R.id.btnTryAgainDialog).setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     fun popBackStack() {
