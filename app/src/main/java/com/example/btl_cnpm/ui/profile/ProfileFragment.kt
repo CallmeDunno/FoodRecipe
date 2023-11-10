@@ -8,8 +8,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -17,16 +15,12 @@ import com.bumptech.glide.Glide
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
 import com.example.btl_cnpm.databinding.FoodRecipeFragmentProfileBinding
-import com.example.btl_cnpm.di.SharedPreferencesModule_ProvideSharedPreferencesFactory
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.profile.adapter.ProfileRecipeAdapter
 import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.UIState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint

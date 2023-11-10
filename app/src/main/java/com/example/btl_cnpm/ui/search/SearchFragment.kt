@@ -17,7 +17,7 @@ import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.ui.home.adapter.CategoryAdapter
 import com.example.btl_cnpm.ui.search.adapter.FilterAdapter
 import com.example.btl_cnpm.ui.search.adapter.SearchRecipeAdapter
-import com.example.btl_cnpm.utils.FoodEntity
+import com.example.btl_cnpm.utils.DataLocal
 import com.example.btl_cnpm.utils.SharedPreferencesManager
 import com.example.btl_cnpm.utils.UIState
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -33,7 +33,7 @@ import kotlin.math.floor
 class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_search
     private var filterTime: Int? = 0
-    private var filterRate: Int? = 0
+    private var filterRate: Int? = -1
     private var userRecipeMap = hashMapOf<Recipe, User>()
     private var filterCategory: String? = null
     private var categoryList = arrayListOf<CategoryType>()
@@ -194,45 +194,27 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     private fun filterDialog() {
         val dialog = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate(R.layout.food_recipe_layout_filter, null)
-        val rvTimeFilter = view.findViewById<RecyclerView>(R.id.rv_time_filter)
         val rvRateFilter = view.findViewById<RecyclerView>(R.id.rv_rate_filter)
         val rvCategory = view.findViewById<RecyclerView>(R.id.rv_category)
         val btnFilter = view.findViewById<AppCompatButton>(R.id.btn_filter)
-        filterRate = 0
-        filterTime = 0
+        filterRate = -1
         filterCategory = ""
-        rvTimeFilter.adapter = filterTimeAdapter
-        filterTimeAdapter.submitList(
-            listOf<Int>(
-                FoodEntity.ALL,
-                FoodEntity.NEWEST,
-                FoodEntity.OLDEST
-            )
-        )
 
         rvRateFilter.adapter = filterRateAdapter
         filterRateAdapter.submitList(
             listOf<Int>(
-                FoodEntity.ONE_STAR,
-                FoodEntity.TWO_STAR,
-                FoodEntity.THREE_STAR,
-                FoodEntity.FOUR_STAR,
-                FoodEntity.FIVE_STAR
+                DataLocal.ONE_STAR,
+                DataLocal.TWO_STAR,
+                DataLocal.THREE_STAR,
+                DataLocal.FOUR_STAR,
+                DataLocal.FIVE_STAR
             )
         )
         rvCategory.adapter = categoryAdapter
         categoryAdapter.submitList(categoryList)
         btnFilter.setOnClickListener {
-            runBlocking {
-                launch {
-                    filter(onComplete = { filterMap ->
-                        searchRecipeAdapter.submitList(filterMap.entries.toList())
-                        dialog.dismiss()
-                    })
-
-                }
-            }
-
+            searchRecipeAdapter.submitList(filter().entries.toList())
+            dialog.dismiss()
         }
         dialog.setCancelable(true)
         dialog.setContentView(view)
@@ -250,36 +232,16 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
             }
         }
     }
-
-    fun filter(onComplete: (HashMap<Recipe, User>) -> Unit) {
-        var filterMap = hashMapOf<Recipe, User>()
-        if (filterRate != 0) {
-            userRecipeMap.filter { entry ->
-                floor(entry.key.rate).toInt() == filterRate
-            }.forEach { entry ->
-                filterMap[entry.key] = entry.value
-            }
-        } else {
-            filterMap = userRecipeMap
+    fun filter(): HashMap<Recipe, User> {
+        var filterMap = userRecipeMap
+        if(filterRate != -1) {
+            filterMap = filterMap.filter { entry -> floor(entry.key.rate).toInt() == filterRate } as HashMap<Recipe, User>
         }
-        when(filterTime) {
-            FoodEntity.NEWEST -> {
-                filterMap.toSortedMap(compareByDescending{it.date})
-            }
-            FoodEntity.OLDEST -> {
-                filterMap.toSortedMap(compareByDescending{it.date})
-            }
+        if(filterCategory != "") {
+            filterMap = filterMap.filter {
+                it.key.idCategoryType.contentEquals(filterCategory)
+            } as HashMap<Recipe, User>
         }
-
-        filterCategory?.let {
-            if (it.isNotEmpty()) {
-                    onComplete.invoke(filterMap.filter { entry ->
-                        entry.key.idCategoryType == filterCategory
-                    } as HashMap<Recipe, User>)
-            } else {
-                onComplete.invoke(filterMap)
-            }
-        }
+        return filterMap
     }
-
 }

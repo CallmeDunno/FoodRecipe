@@ -1,24 +1,14 @@
 package com.example.btl_cnpm.ui.home.adapter
 
-import android.content.Context
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.btl_cnpm.R
 import com.example.btl_cnpm.databinding.FoodRecipeLayoutNewRecipeBinding
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 import kotlin.math.floor
 
 class NewRecipeAdapter(val onItemCLick: (String) -> Unit): ListAdapter<Map.Entry<Recipe, User>, NewRecipeAdapter.NewRecipeViewHolder>(object : DiffUtil.ItemCallback<Map.Entry<Recipe, User>>() {

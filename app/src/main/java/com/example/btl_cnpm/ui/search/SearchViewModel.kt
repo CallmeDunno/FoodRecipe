@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocal
 import com.example.btl_cnpm.data.local.RecipeLocal.RecipeLocalRepository
 import com.example.btl_cnpm.data.repository.HomeRepository
+import com.example.btl_cnpm.data.repository.SearchRepository
 
 import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
@@ -16,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class SearchViewModel @Inject constructor(private val repository: HomeRepository, private val localRepository: RecipeLocalRepository) : ViewModel() {
+class SearchViewModel @Inject constructor(private val repository: SearchRepository, private val localRepository: RecipeLocalRepository) : ViewModel() {
 
     fun getCategory(): MutableLiveData<UIState<ArrayList<CategoryType>>> {
         val mutableLiveData = MutableLiveData<UIState<ArrayList<CategoryType>>>()

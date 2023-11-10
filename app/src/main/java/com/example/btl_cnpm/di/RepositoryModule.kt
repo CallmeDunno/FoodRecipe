@@ -23,8 +23,8 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideHomeRepository(fAuth: FirebaseAuth, fFireStore: FirebaseFirestore) =
-        HomeRepository(fAuth, fFireStore)
+    fun provideHomeRepository(fFireStore: FirebaseFirestore) =
+        HomeRepository(fFireStore)
 
     @Singleton
     @Provides
@@ -33,8 +33,9 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideProfileRepository(fFireStore: FirebaseFirestore) =
-        ProfileRepository(fFireStore)
+    fun provideProfileRepository(fFireStore: FirebaseFirestore,
+                                 fStorage: FirebaseStorage
+    ) = ProfileRepository(fFireStore, fStorage)
 
     @Singleton
     @Provides

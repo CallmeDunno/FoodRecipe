@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.floor
 
 @SuppressLint("SuspiciousIndentation")
 @AndroidEntryPoint
@@ -137,24 +138,27 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
                     }
                 }
             }
-            homeViewModel.getRecipes().observe(requireActivity()) {
-                when (it) {
+            homeViewModel.getRecipes().observe(requireActivity()) { resultRecipe ->
+                when (resultRecipe) {
                     is UIState.Success -> {
-                        progress.visibility = View.GONE
-                        recipeList = it.data
-                        recipeAdapter.submitList(it.data)
+                        recipeList = resultRecipe.data
                         homeViewModel.getUsers().observe(requireActivity()) { result ->
                             when (result) {
                                 is UIState.Success -> {
+                                    progress.visibility = View.GONE
                                     userList = result.data
+                                    recipeAdapter.submitList(recipeList)
                                     runBlocking {
                                         launch {
                                             getUserList()
                                             binding.progressNew.visibility = View.GONE
-                                            newRecipeAdapter.submitList(userRecipeMap.entries.toList())
+                                            newRecipeAdapter.submitList(userRecipeMap.entries.filter {entry->
+                                                floor(entry.key.rate).toInt() == 4 || floor(entry.key.rate).toInt() == 5
+                                            }.take(5)
+                                                .toList()
+                                            )
                                         }
                                     }
-
                                 }
 
                                 is UIState.Failure -> {
@@ -167,7 +171,7 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
                     }
 
                     is UIState.Failure -> {
-                        it.message?.let { mes ->
+                        resultRecipe.message?.let { mes ->
                             showDialogFail(mes)
                             progress.visibility = View.GONE
                         }
@@ -182,7 +186,7 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
         }
     }
 
-    suspend fun getUserList() {
+    private suspend fun getUserList() {
         withContext(Dispatchers.Unconfined) {
             recipeList.forEach { recipe ->
                 userList.forEach { user ->

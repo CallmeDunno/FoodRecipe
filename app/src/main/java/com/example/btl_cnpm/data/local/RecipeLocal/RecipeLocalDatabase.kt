@@ -9,21 +9,4 @@ import androidx.room.RoomDatabase
 abstract class RecipeLocalDatabase: RoomDatabase() {
     abstract fun recipeLocalDao(): RecipeLocalDao
 
-    companion object {
-        private var INSTANCE: RecipeLocalDatabase? = null
-
-        fun getInstance(context: Context): RecipeLocalDatabase? {
-            if (INSTANCE == null) {
-                synchronized(RecipeLocalDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, RecipeLocalDatabase::class.java, "RecipeLocal").build()
-                }
-            }
-            return INSTANCE
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
-    }
-
 }

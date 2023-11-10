@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.btl_cnpm.databinding.FoodRecipeLayoutItemRecipeBinding
+import com.example.btl_cnpm.model.Bookmark
 import com.example.btl_cnpm.model.Recipe
 
 class RecipeAdapter(val onItemClick:(String) -> Unit): ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(object : DiffUtil.ItemCallback<Recipe>() {
@@ -25,9 +26,6 @@ class RecipeAdapter(val onItemClick:(String) -> Unit): ListAdapter<Recipe, Recip
             binding.txtRecipeName.text = recipe.name
             binding.txtRecipeMinute.text = "${recipe.timer}"
             binding.txtRecipeRate.text = recipe.rate.toString()
-            binding.btnMark.setOnClickListener {
-
-            }
             itemView.setOnClickListener {
                 onItemClick.invoke(recipe.id)
             }

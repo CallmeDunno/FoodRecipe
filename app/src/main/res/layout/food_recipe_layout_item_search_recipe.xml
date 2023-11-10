@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/_8sdp"
                     android:text="By James Milner"
-                    android:textColor="@color/light_gray"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_8ssp" />
             </LinearLayout>
 
