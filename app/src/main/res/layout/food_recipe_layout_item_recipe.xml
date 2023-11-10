@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_bg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_180sdp"
+            android:layout_height="@dimen/_130sdp"
             android:layout_marginTop="@dimen/_50sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -24,8 +24,8 @@
             android:backgroundTint="@color/gray"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_recipe"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
