@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.btl_cnpm.databinding.FoodRecipeLayoutItemCategoryBinding
 import com.example.btl_cnpm.model.CategoryType
 
-class CategoryAdapter(val onItemClick: (String) -> Unit) : ListAdapter<CategoryType, CategoryAdapter.CategoryViewHolder>(object: DiffUtil.ItemCallback<CategoryType>() {
+class CategoryAdapter(val onItemClick: (CategoryType) -> Unit) : ListAdapter<CategoryType, CategoryAdapter.CategoryViewHolder>(object: DiffUtil.ItemCallback<CategoryType>() {
     override fun areItemsTheSame(oldItem: CategoryType, newItem: CategoryType): Boolean {
         return oldItem.id == newItem.id
     }
@@ -23,7 +23,7 @@ class CategoryAdapter(val onItemClick: (String) -> Unit) : ListAdapter<CategoryT
         fun onBind(categoryType: CategoryType) {
             binding.txtRecipeCategory.text = categoryType.name
             itemView.setOnClickListener {
-                onItemClick.invoke(categoryType.id)
+                onItemClick.invoke(categoryType)
             }
         }
 

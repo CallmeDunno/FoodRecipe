@@ -43,11 +43,11 @@ class HomeFragment : BaseFragment<FoodRecipeFragmentHomeBinding>() {
     lateinit var sharedPre: SharedPreferencesManager
     private val categoryAdapter by lazy {
         CategoryAdapter(onItemClick = {
-            if (it.contentEquals("T9b6E7ecYMt4Qyq3Pmn0")) {
+            if (it.id.contentEquals("T9b6E7ecYMt4Qyq3Pmn0")) {
                 recipeAdapter.submitList(recipeList)
             } else {
                 newRecipeList = recipeList.filter { recipe ->
-                    recipe.idCategoryType.contentEquals(it)
+                    recipe.idCategoryType.contentEquals(it.id)
                 }.toMutableList()
                 if (newRecipeList.isEmpty()) {
                     recipeAdapter.submitList(recipeList)

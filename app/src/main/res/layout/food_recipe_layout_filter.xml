@@ -25,16 +25,39 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="@dimen/_14sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/rate"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/rate"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginEnd="@dimen/_2sdp"/>
+            <ImageView
+                android:id="@+id/img_star"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_star"
+                android:visibility="visible"
+                android:layout_marginStart="@dimen/_8sdp"/>
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_rate_filter"
@@ -44,16 +67,29 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
             tools:listitem="@layout/food_recipe_layout_item_filter"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/category"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_14sdp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/category"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"/>
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_category"
@@ -61,8 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/food_recipe_layout_item_category"
-            app:spanCount="2"/>
+            app:spanCount="2"
+            tools:listitem="@layout/food_recipe_layout_item_category" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_filter"
@@ -71,7 +107,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/bg_round_orange_10dp"
-            android:backgroundTint="@color/veronese_green"
+            android:backgroundTint="@color/gray"
             android:text="@string/filter"
             android:textAllCaps="false"
             android:textColor="@color/white"
