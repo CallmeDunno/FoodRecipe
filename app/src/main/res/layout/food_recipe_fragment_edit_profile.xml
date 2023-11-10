@@ -31,7 +31,7 @@
                     android:id="@+id/img_profile_avatar"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
-                    android:background="@color/orange_yellow"
+                    android:background="@color/background_null"
                     android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
 
@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/name"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
@@ -79,9 +80,9 @@
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:text="Biography"
+            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
-
 
         <EditText
             android:id="@+id/edt_bio"
@@ -91,35 +92,49 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/bg_text_input"
             android:hint="Enter Name"
-            android:inputType="text"
-            android:maxLines="1"
+            android:inputType="textMultiLine"
+            android:lines="4"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_edit"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/bg_round_orange_10dp"
-            android:backgroundTint="@color/veronese_green"
-            android:text="Edit"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_11ssp" />
+            android:layout_marginTop="@dimen/_30sdp" >
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/bg_round_orange_10dp"
-            android:backgroundTint="@color/gray"
-            android:text="Cancel"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_11ssp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_round_orange_10dp"
+                android:backgroundTint="@color/veronese_green"
+                android:text="Edit"
+                android:fontFamily="@font/poppins_medium"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_orange_10dp"
+                android:backgroundTint="@color/gray"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </LinearLayout>
+
 </layout>

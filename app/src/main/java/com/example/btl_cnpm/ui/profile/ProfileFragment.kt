@@ -11,6 +11,7 @@ import android.view.WindowManager
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.btl_cnpm.R
 import com.example.btl_cnpm.base.BaseFragment
@@ -34,7 +35,11 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
     lateinit var sharedPre: SharedPreferencesManager
     private val profileRecipeAdapter by lazy {
         ProfileRecipeAdapter(onItemClick = {
-
+            findNavController().navigate(
+                ProfileFragmentDirections.actionProfileFragmentToRecipeFragment(
+                    it
+                )
+            )
         })
     }
     private var userRecipeMap = hashMapOf<Recipe, User>()
@@ -54,7 +59,7 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
                 requireView().findNavController().navigate(R.id.newRecipeFragment)
             }
 
-            headerProfile.btnMoreHeader.setOnClickListener{
+            headerProfile.btnMoreHeader.setOnClickListener {
                 showDialogOption()
             }
             sharedPre.getString("idUserRemember")?.let {
@@ -63,14 +68,15 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
             sharedPre.getString("idUserTemp")?.let {
                 userId = it
             }
-            if(userId.isNotEmpty()) {
+            if (userId.isNotEmpty()) {
                 profileViewModel.getUser(userId).observe(requireActivity()) { result ->
                     when (result) {
                         is UIState.Success -> {
                             txtProfileName.text = result.data.username
                             txtProfileBio.text = result.data.bio
-                            if(result.data.image.isNotEmpty()) {
-                                Glide.with(requireContext()).load(result.data.image).into(imgProfileAvatar)
+                            if (result.data.image.isNotEmpty()) {
+                                Glide.with(requireContext()).load(result.data.image)
+                                    .into(imgProfileAvatar)
                             }
                             profileViewModel.getMyRecipes(userId)
                                 .observe(requireActivity()) { resultRecipe ->
@@ -107,7 +113,7 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
         }
     }
 
-    fun showDialogOption() {
+    private fun showDialogOption() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.food_recipe_dialog_edit_sign_out)
@@ -116,7 +122,7 @@ class ProfileFragment : BaseFragment<FoodRecipeFragmentProfileBinding>() {
         val btnSignOut = dialog.findViewById<AppCompatButton>(R.id.btn_sign_out)
 
         btnEdit.setOnClickListener {
-            requireView().findNavController().navigate(R.id.editProfileFragment2)
+            requireView().findNavController().navigate(R.id.editProfileFragment)
             dialog.dismiss()
         }
 
