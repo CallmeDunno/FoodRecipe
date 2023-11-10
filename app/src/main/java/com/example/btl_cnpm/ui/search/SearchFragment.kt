@@ -3,6 +3,7 @@ package com.example.btl_cnpm.ui.search
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,7 +33,6 @@ import kotlin.math.floor
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
     override val layoutId = R.layout.food_recipe_fragment_search
-    private var filterTime: Int? = 0
     private var filterRate: Int? = -1
     private var userRecipeMap = hashMapOf<Recipe, User>()
     private var filterCategory: String? = null
@@ -51,23 +51,6 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
                     it
                 )
             )
-        })
-    }
-    private val filterTimeAdapter by lazy {
-        FilterAdapter(onItemClick = {
-            filterTime = it
-        })
-    }
-
-    private val filterRateAdapter by lazy {
-        FilterAdapter(onItemClick = {
-            filterRate = it
-        })
-    }
-
-    private val categoryAdapter by lazy {
-        CategoryAdapter(onItemClick = {
-            filterCategory = it
         })
     }
 
@@ -197,8 +180,25 @@ class SearchFragment : BaseFragment<FoodRecipeFragmentSearchBinding>() {
         val rvRateFilter = view.findViewById<RecyclerView>(R.id.rv_rate_filter)
         val rvCategory = view.findViewById<RecyclerView>(R.id.rv_category)
         val btnFilter = view.findViewById<AppCompatButton>(R.id.btn_filter)
+        val txtRate = view.findViewById<TextView>(R.id.txt_rate)
+        val txtCategoryType = view.findViewById<TextView>(R.id.txt_category)
+        val filterRateAdapter by lazy {
+            FilterAdapter(onItemClick = {
+                filterRate = it
+                txtRate.text = "$it"
+            })
+        }
+        val categoryAdapter by lazy {
+            CategoryAdapter(onItemClick = {
+                filterCategory = it.id
+                txtCategoryType.text = it.name
+            })
+        }
         filterRate = -1
         filterCategory = ""
+        txtRate.text = ""
+        txtCategoryType.text = ""
+
 
         rvRateFilter.adapter = filterRateAdapter
         filterRateAdapter.submitList(
