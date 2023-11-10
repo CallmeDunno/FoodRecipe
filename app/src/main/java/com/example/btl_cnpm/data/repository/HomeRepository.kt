@@ -4,16 +4,14 @@ import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 import javax.inject.Inject
 
 
-class HomeRepository @Inject constructor(private val fAuth: FirebaseAuth, private val fFireStore: FirebaseFirestore) {
+class HomeRepository @Inject constructor(private val fFireStore: FirebaseFirestore) {
     private var listCategoryType = arrayListOf<CategoryType>()
     private var listRecipe = arrayListOf<Recipe>()
-    private var listUser2 = arrayListOf<User>()
     private var listUser = arrayListOf<User>()
 
     fun getCategoryTypeList(result: (UIState<ArrayList<CategoryType>>)-> Unit) {
@@ -112,9 +110,5 @@ class HomeRepository @Inject constructor(private val fAuth: FirebaseAuth, privat
                     result.invoke(UIState.Failure(it.exception?.message))
                 }
             }
-    }
-
-    fun map() {
-
     }
 }

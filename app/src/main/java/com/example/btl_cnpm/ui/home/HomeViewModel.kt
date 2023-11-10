@@ -3,6 +3,7 @@ package com.example.btl_cnpm.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.btl_cnpm.data.local.BookmarkLocalRepository
 import com.example.btl_cnpm.data.repository.HomeRepository
 import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: HomeRepository, private val bookmarkLocalRepository: BookmarkLocalRepository) : ViewModel() {
     fun getCategoryType(): MutableLiveData<UIState<ArrayList<CategoryType>>> {
         val mutableLiveData = MutableLiveData<UIState<ArrayList<CategoryType>>>()
         viewModelScope.launch(Dispatchers.IO) {

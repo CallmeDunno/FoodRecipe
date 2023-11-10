@@ -87,7 +87,7 @@
                     android:layout_weight="1"
                     android:text="By James Milner"
                     android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/light_gray"
+                    android:textColor="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"/>
                 <ImageView
                     android:layout_width="@dimen/_20sdp"

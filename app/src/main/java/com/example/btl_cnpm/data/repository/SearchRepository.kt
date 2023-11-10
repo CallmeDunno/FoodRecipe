@@ -1,22 +1,18 @@
 package com.example.btl_cnpm.data.repository
 
-import android.util.Log
 import com.example.btl_cnpm.model.CategoryType
 import com.example.btl_cnpm.model.Recipe
 import com.example.btl_cnpm.model.User
 import com.example.btl_cnpm.utils.UIState
-import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 
 class SearchRepository @Inject constructor(private val fFireStore: FirebaseFirestore) {
     private var listCategoryType = arrayListOf<CategoryType>()
-    private var userRecipeMap = hashMapOf<Recipe, User>()
-
+    private var listRecipe = arrayListOf<Recipe>()
     private var listUser = arrayListOf<User>()
-    private var listUser2 = arrayListOf<User>()
 
-    fun getCategoryList(result: (UIState<ArrayList<CategoryType>>) -> Unit) {
+    fun getCategoryTypeList(result: (UIState<ArrayList<CategoryType>>) -> Unit) {
         listCategoryType.clear()
         fFireStore.collection("CategoryType")
             .get()
@@ -29,17 +25,17 @@ class SearchRepository @Inject constructor(private val fFireStore: FirebaseFires
                     }
                     result.invoke(UIState.Success(listCategoryType))
                 } else {
-                    result.invoke(UIState.Failure(it.exception?.message.toString()))
+                    result.invoke(UIState.Failure(it.exception?.message))
                 }
             }
     }
 
-    fun getRecipeByName(result: (UIState<HashMap<Recipe, User>>) -> Unit) {
-        userRecipeMap.clear()
+    fun getRecipeList(result: (UIState<ArrayList<Recipe>>) -> Unit) {
+        listRecipe.clear()
         fFireStore.collection("Recipe")
             .get()
             .addOnCompleteListener {
-                if(it.isSuccessful) {
+                if (it.isSuccessful) {
                     for (document in it.result) {
                         val id = document.id
                         val name = document.toObject(Recipe::class.java).name
@@ -50,46 +46,46 @@ class SearchRepository @Inject constructor(private val fFireStore: FirebaseFires
                         val image = document.toObject(Recipe::class.java).image
                         val timer = document.toObject(Recipe::class.java).timer
                         val rate = document.toObject(Recipe::class.java).rate
-                        getUserByRecipe(idUser) {result ->
-                            when(result) {
-                                is UIState.Success -> {
-                                    userRecipeMap[Recipe(id, name, idCategoryType, idUser, ingredient, date, image, timer, rate)] = result.data
-                                }
-                                is UIState.Failure -> {
-                                    result.message?.let {mes->
-                                        Log.d("tung", mes)
-                                    }
-                                }
-                            }
-                        }
+                        listRecipe.add(
+                            Recipe(
+                                id,
+                                name,
+                                idCategoryType,
+                                idUser,
+                                ingredient,
+                                date,
+                                image,
+                                timer,
+                                rate
+                            )
+                        )
                     }
-                    result.invoke(UIState.Success(userRecipeMap))
+                    result.invoke(UIState.Success(listRecipe))
                 } else {
                     result.invoke(UIState.Failure(it.exception?.message))
                 }
             }
     }
 
-    fun getUserByRecipe(id: String, result: (UIState<User>) -> Unit) {
-        listUser2.clear()
+    fun getUserList(result: (UIState<ArrayList<User>>) -> Unit) {
+        listUser.clear()
         fFireStore.collection("User")
-            .whereEqualTo("id", id)
             .get()
             .addOnCompleteListener {
-                if(it.isSuccessful) {
-                    for(doc in it.result) {
+                if (it.isSuccessful) {
+                    for (doc in it.result) {
                         val id = doc.toObject(User::class.java).id
                         val username = doc.toObject(User::class.java).username
                         val image = doc.toObject(User::class.java).image
-                        listUser2.add(User(id, username, image))
+                        listUser.add(User(id, username, image))
                     }
-                    if(listUser2.isNotEmpty()) {
-                        result.invoke(UIState.Success(listUser2[0]))
+                    if (listUser.isNotEmpty()) {
+                        result.invoke(UIState.Success(listUser))
                     } else {
-                        result.invoke(UIState.Failure("cant get user"))
+                        result.invoke(UIState.Failure(it.exception?.message))
                     }
                 } else {
-                    result.invoke(UIState.Failure("cant get user"))
+                    result.invoke(UIState.Failure(it.exception?.message))
                 }
             }
     }

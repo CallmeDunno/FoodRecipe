@@ -1,5 +1,6 @@
 package com.example.btl_cnpm.ui.edit_profile
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,5 +33,15 @@ class EditProfileViewModel @Inject constructor(private val repository: ProfileRe
             }
         }
         return user
+    }
+
+    fun uploadImage(uri: Uri): MutableLiveData<UIState<String>> {
+        val downloadUri = MutableLiveData<UIState<String>>()
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.uploadImageToFirebase(uri) {
+                downloadUri.postValue(it)
+            }
+        }
+        return downloadUri
     }
 }

@@ -49,7 +49,7 @@
                 android:id="@+id/img_avatar"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/bg_round_orange_10dp"
+                android:background="@drawable/bg_oval_orange"
                 android:scaleType="centerCrop" />
         </LinearLayout>
 
@@ -86,10 +86,6 @@
                 android:tint="@color/white" />
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,7 +130,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_14sdp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/new_recipes"
+                    android:text="@string/recommend_recipe"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold" />
@@ -156,8 +152,6 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/food_recipe_layout_new_recipe" />
             </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
