@@ -150,6 +150,7 @@ class NewRecipeFragment : BaseFragment<FoodRecipeFragmentNewRecipeBinding>() {
             btnAddNewRecipe.setOnClickListener {
                 if (isValid(uriImage)){
                     viewModel.uploadImage(Uri.parse(uriImage))
+                    notify("Please wait a moment........")
                 }
             }
 
